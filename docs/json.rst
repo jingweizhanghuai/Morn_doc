@@ -368,8 +368,8 @@ In this performance test, Morn is compared with:
 
 .. _header-n72:
 
-Test 1:
-~~~~~~~
+Test 1
+~~~~~~
 
 Testing parse
 `citm_catalog.json <https://github.com/miloyip/nativejson-benchmark/blob/master/data/citm_catalog.json>`__,
@@ -423,7 +423,7 @@ Result is:
 
 .. _header-n78:
 
-测试二
+Test 2
 ~~~~~~
 
 Testing parse

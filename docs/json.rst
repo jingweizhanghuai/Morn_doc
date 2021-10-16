@@ -55,17 +55,17 @@ as:
    #define JSON_UNKNOWN     0
    #define JSON_KEY_UNKNOWN 1
    #define JSON_BOOL        2
-   #define JSON_KEY_BOOL    3	//例如上例中的 "t": true ,"f": false,
-   #define JSON_INT         4	//例如上例中的 0,1,2,3
-   #define JSON_KEY_INT     5	//例如上例中的 "i": 123,
+   #define JSON_KEY_BOOL    3	//such as "t": true ,"f": false,
+   #define JSON_INT         4	//such as 0,1,2,3
+   #define JSON_KEY_INT     5	//such as "i": 123,
    #define JSON_DOUBLE      6
-   #define JSON_KEY_DOUBLE  7	//例如上例中的 "pi": 3.1415926,
-   #define JSON_STRING      8	//例如上例中的 "Dongcheng","Xicheng","Haidian","Chaoyang"
-   #define JSON_KEY_STRING  9	//例如上例中的 "hello": "world",
-   #define JSON_LIST       10	//例如上例中的 {"value":0}
-   #define JSON_KEY_LIST   11	//例如上例中的 "date":{"year":2021,"month":"June","day":5},
-   #define JSON_ARRAY      12	//例如上例中的 [10,11,12,13]
-   #define JSON_KEY_ARRAY  13	//例如上例中的 "a1": [0,1,2,3],
+   #define JSON_KEY_DOUBLE  7	//such as "pi": 3.1415926,
+   #define JSON_STRING      8	//such as "Dongcheng","Xicheng","Haidian","Chaoyang"
+   #define JSON_KEY_STRING  9	//such as "hello": "world",
+   #define JSON_LIST       10	//such as {"value":0}
+   #define JSON_KEY_LIST   11	//such as "date":{"year":2021,"month":"June","day":5},
+   #define JSON_ARRAY      12	//such as [10,11,12,13]
+   #define JSON_KEY_ARRAY  13	//such as "a1": [0,1,2,3],
 
 JSON Node is defined as:
 
@@ -75,11 +75,11 @@ JSON Node is defined as:
    {
        union
        {
-           bool     dataBool;   //type为JSON_KEY_BOOL或JSON_BOOL时有效
-           int32_t  dataS32;    //type为JSON_KEY_INT或JSON_INT时有效
-           double   dataD64;    //type为JSON_KEY_DOUBLE或JSON_DOUBLE时有效
-           char    *string;     //type为JSON_KEY_STRING或JSON_STRING时有效
-           uint16_t num;        //子节点数量，type为JSON_KEY_ARRAY、JSON_ARRAY、JSON_KEY_LIST或JSON_LIST时有效
+           bool     dataBool;   //valid when type is JSON_KEY_BOOL or JSON_BOOL
+           int32_t  dataS32;    //valid when type is JSON_KEY_INT or JSON_INT
+           double   dataD64;    //valid when type is JSON_KEY_DOUBLE or JSON_DOUBLE
+           char    *string;     //valid when type is JSON_KEY_STRING or JSON_STRING
+           uint16_t num;        //child node number, valid when type isJSON_KEY_ARRAY、JSON_ARRAY、JSON_KEY_LIST or JSON_LIST
        };
        char *key;
        char type;
@@ -277,8 +277,10 @@ Output of these above two programs is:
 
 .. code:: 
 
-   date.year=2021,type=KEY_INT
-   date.month=June,type=KEY_STRING
+   date.year=2021,type=KEY_INT
+
+   date.month=June,type=KEY_STRING
+
    date.day=5,type=KEY_INT
 
 There are several flexible forms for reading node from arrays:
@@ -484,8 +486,9 @@ different json file. rapidjson and yyjson are known for high performance
 JSON parse.
 
 The testing file are: canada.json
-citm\ *catalog.json*\ `twitter.json <https://github.com/chadaustin/sajson/blob/master/testdata/twitter.json>`__\ *[github*\ events.json](https://github.com/chadaustin/sajson/blob/master/testdata/github\ *events.json)
-[apache*\ builds.json](https://github.com/chadaustin/sajson/blob/master/testdata/apache_builds.json)
+citm_catalog.json `twitter.json <https://github.com/chadaustin/sajson/blob/master/testdata/twitter.json>`__
+`github_events.json <https://github.com/chadaustin/sajson/blob/master/testdata/github_events.json>`__
+apache_builds.json <https://github.com/chadaustin/sajson/blob/master/testdata/apache_builds.json>`__
 `mesh.json <https://github.com/chadaustin/sajson/blob/master/testdata/mesh.json>`__
 `mesh.pretty.json <https://github.com/chadaustin/sajson/blob/master/testdata/mesh.pretty.json>`__
 and

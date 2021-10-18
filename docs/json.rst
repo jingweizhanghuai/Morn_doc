@@ -87,7 +87,7 @@ JSON Node is defined as:
 
 .. _header-n10:
 
-Interface
+API
 ---------
 
 .. _header-n11:

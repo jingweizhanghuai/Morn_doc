@@ -80,8 +80,8 @@ Read from Map
 
 .. code:: c
 
-   void *mMapRead(MMap *map,const char *key);
-   void *mMapRead(MMap *map,const char *key,char *value);
+   void *mMapRead(MMap *map,const char *key);
+   void *mMapRead(MMap *map,const char *key,char *value);
    void *mMapRead(MMap *map,const void *key,int key_size,void *value,int *value_size);
 
 when the key type is a string, ``key_size`` can be set as NULL.
@@ -102,7 +102,7 @@ Delete Map Node
 
 .. code:: c
 
-   void mMapDelete(MMap *map,const char *key);
+   void mMapDelete(MMap *map,const char *key);
    void mMapDelete(MMap *map,const void *key,int key_size);
 
 You can delete a key-value node from the ``map`` using ``mMapDelete``.
@@ -272,43 +272,43 @@ we can mix use any type in map.
 
 .. code:: c
 
-   int main()
-   {
-       MMap *map = mMapCreate();
-   
-       //key is pointer
-       int *a=NULL;int idx=1;
-       mMapWrite(map,&a,sizeof(int *),&idx,sizeof(int));
-   
-       //key is integer
-       int b=1;idx=2;
-       mMapWrite(map,&b,sizeof(int),&idx,sizeof(int));
-   
-       //key is float
-       float c=2;idx=3;
-       mMapWrite(map,&c,sizeof(float),&idx,sizeof(int));
-   
-       //key is array
-       double d[4]={1,9,4,9};idx=4;
-       mMapWrite(map,d,4*sizeof(double),&idx,sizeof(int));
-   
-       //key is string
-       char *e="test string";idx=5;
-       mMapWrite(map,e,strlen(e),&idx,sizeof(int));
-   
-       //key is struct
-       struct {int d1;float d2;double d3[3];} f;idx=6;
-       mMapWrite(map,&f,sizeof(f),&idx,sizeof(int));
-       
-       printf("f idx=%d\n",*(int *)mMapRead(map,&f,sizeof(f),NULL,DFLT));
-       printf("e idx=%d\n",*(int *)mMapRead(map, e,strlen(e),NULL,DFLT));
-       printf("d idx=%d\n",*(int *)mMapRead(map, d,sizeof(d),NULL,DFLT));
-       printf("c idx=%d\n",*(int *)mMapRead(map,&c,sizeof(c),NULL,DFLT));
-       printf("b idx=%d\n",*(int *)mMapRead(map,&b,sizeof(b),NULL,DFLT));
-       printf("a idx=%d\n",*(int *)mMapRead(map,&a,sizeof(a),NULL,DFLT));
-   
-       mMapRelease(map);
-       return 0;
+   int main()
+   {
+       MMap *map = mMapCreate();
+       
+       //key is pointer
+       int *a=NULL;int idx=1;
+       mMapWrite(map,&a,sizeof(int *),&idx,sizeof(int));
+       
+       //key is integer
+       int b=1;idx=2;
+       mMapWrite(map,&b,sizeof(int),&idx,sizeof(int));
+       
+       //key is float
+       float c=2;idx=3;
+       mMapWrite(map,&c,sizeof(float),&idx,sizeof(int));
+       
+       //key is array
+       double d[4]={1,9,4,9};idx=4;
+       mMapWrite(map,d,4*sizeof(double),&idx,sizeof(int));
+       
+       //key is string
+       char *e="test string";idx=5;
+       mMapWrite(map,e,strlen(e),&idx,sizeof(int));
+       
+       //key is struct
+       struct {int d1;float d2;double d3[3];} f;idx=6;
+       mMapWrite(map,&f,sizeof(f),&idx,sizeof(int));
+       
+       printf("f idx=%d\n",*(int *)mMapRead(map,&f,sizeof(f),NULL,DFLT));
+       printf("e idx=%d\n",*(int *)mMapRead(map, e,strlen(e),NULL,DFLT));
+       printf("d idx=%d\n",*(int *)mMapRead(map, d,sizeof(d),NULL,DFLT));
+       printf("c idx=%d\n",*(int *)mMapRead(map,&c,sizeof(c),NULL,DFLT));
+       printf("b idx=%d\n",*(int *)mMapRead(map,&b,sizeof(b),NULL,DFLT));
+       printf("a idx=%d\n",*(int *)mMapRead(map,&a,sizeof(a),NULL,DFLT));
+
+       mMapRelease(map);
+       return 0;
    }
 
 Output is:
@@ -327,29 +327,29 @@ following example, an error will occur:
 
 .. code:: c
 
-   int main()
-   {
-       MMap *map = mMapCreate();
-       
-       char *a="abcd";int idx=1;
-       mMapWrite(map,a,strlen(a),&idx,sizeof(int));
-       
-       unsigned char b[4]={97,98,99,100};idx=2;
-       mMapWrite(map,b,sizeof(b),&idx,sizeof(int));
-       
-       int c = 1684234849;idx=3;
-       mMapWrite(map,&c,sizeof(c),&idx,sizeof(int));
-       
-       float d = 16777999408082104000000.0f;idx=4;
-       mMapWrite(map,&d,sizeof(d),&idx,sizeof(int));
-       
-       printf("a idx=%d\n",*(int *)mMapRead(map, a,strlen(a),NULL,DFLT));
-       printf("b idx=%d\n",*(int *)mMapRead(map, b,sizeof(b),NULL,DFLT));
-       printf("c idx=%d\n",*(int *)mMapRead(map,&c,sizeof(c),NULL,DFLT));
-       printf("d idx=%d\n",*(int *)mMapRead(map,&d,sizeof(d),NULL,DFLT));
-       
-       mMapRelease(map);
-       return 0;
+   int main()
+   {
+       MMap *map = mMapCreate();
+       
+       char *a="abcd";int idx=1;
+       mMapWrite(map,a,strlen(a),&idx,sizeof(int));
+       
+       unsigned char b[4]={97,98,99,100};idx=2;
+       mMapWrite(map,b,sizeof(b),&idx,sizeof(int));
+       
+       int c = 1684234849;idx=3;
+       mMapWrite(map,&c,sizeof(c),&idx,sizeof(int));
+       
+       float d = 16777999408082104000000.0f;idx=4;
+       mMapWrite(map,&d,sizeof(d),&idx,sizeof(int));
+       
+       printf("a idx=%d\n",*(int *)mMapRead(map, a,strlen(a),NULL,DFLT));
+       printf("b idx=%d\n",*(int *)mMapRead(map, b,sizeof(b),NULL,DFLT));
+       printf("c idx=%d\n",*(int *)mMapRead(map,&c,sizeof(c),NULL,DFLT));
+       printf("d idx=%d\n",*(int *)mMapRead(map,&d,sizeof(d),NULL,DFLT));
+       
+       mMapRelease(map);
+       return 0;
    }
 
 Output is:
@@ -390,19 +390,19 @@ strings for the test:
 
 .. code:: c
 
-   struct TestData
-   {
-       char data_s[32];
-       int data_i;
-   };
-   void data_gerenate(struct TestData *data,int number)
-   {
-       int i,j;
-       for(i=0;i<number;i++)
-       {
-           mRandString(data[i].data_s,15,31);
-           data[i].data_i = mRand();
-       }
+   struct TestData
+   {
+       char data_s[32];
+       int data_i;
+   };
+   void data_gerenate(struct TestData *data,int number)
+   {
+       int i,j;
+       for(i=0;i<number;i++)
+       {
+           mRandString(data[i].data_s,15,31);
+           data[i].data_i = mRand();
+       }
    }
 
 .. _header-n83:
@@ -414,32 +414,32 @@ Test with the key is string, and the value is integer:
 
 .. code:: c
 
-   printf("\n10000 times test with 100 node for key is string and value is integer:\n");
-   mTimerBegin("STL map");
-   for(int n=0;n<10000;n++)
-   {
-       for(int i=0;i<100;i++) stl_map[data[i].data_s]=data[i].data_i;
-       for(int i=0;i<100;i++) int data_i = stl_map.find(data[i].data_s)->second;
-       for(int i=0;i<100;i++) stl_map.erase(data[i].data_s);
-   }
-   mTimerEnd("STL map");
-   
-   mTimerBegin("STL unordered_map");
-   for(int n=0;n<10000;n++)
-   {
-       for(int i=0;i<100;i++) stl_unorderedmap[data[i].data_s]=data[i].data_i;
-       for(int i=0;i<100;i++) int data_i = stl_unorderedmap.find(data[i].data_s)->second;
-       for(int i=0;i<100;i++) stl_unorderedmap.erase(data[i].data_s);
-   }
-   mTimerEnd("STL unordered_map");
-   
-   mTimerBegin("Morn map");
-   for(int n=0;n<10000;n++)
-   {
-       for(int i=0;i<100;i++) mMapWrite(morn_map,data[i].data_s,DFLT,&(data[i].data_i),sizeof(int));
-       for(int i=0;i<100;i++) int *data_i = (int *)mMapRead(morn_map,data[i].data_s);
-       for(int i=0;i<100;i++) mMapNodeDelete(morn_map,data[i].data_s);
-   }
+   printf("\n10000 times test with 100 node for key is string and value is integer:\n");
+   mTimerBegin("STL map");
+   for(int n=0;n<10000;n++)
+   {
+       for(int i=0;i<100;i++) stl_map[data[i].data_s]=data[i].data_i;
+       for(int i=0;i<100;i++) int data_i = stl_map.find(data[i].data_s)->second;
+       for(int i=0;i<100;i++) stl_map.erase(data[i].data_s);
+   }
+   mTimerEnd("STL map");
+   
+   mTimerBegin("STL unordered_map");
+   for(int n=0;n<10000;n++)
+   {
+       for(int i=0;i<100;i++) stl_unorderedmap[data[i].data_s]=data[i].data_i;
+       for(int i=0;i<100;i++) int data_i = stl_unorderedmap.find(data[i].data_s)->second;
+       for(int i=0;i<100;i++) stl_unorderedmap.erase(data[i].data_s);
+   }
+   mTimerEnd("STL unordered_map");
+   
+   mTimerBegin("Morn map");
+   for(int n=0;n<10000;n++)
+   {
+       for(int i=0;i<100;i++) mMapWrite(morn_map,data[i].data_s,DFLT,&(data[i].data_i),sizeof(int));
+       for(int i=0;i<100;i++) int *data_i = (int *)mMapRead(morn_map,data[i].data_s);
+       for(int i=0;i<100;i++) mMapNodeDelete(morn_map,data[i].data_s);
+   }
    mTimerEnd("Morn map");
 
 We test: 1. read and write 100 key-value nodes with 10000 times, 2. read
@@ -469,7 +469,7 @@ Test with the key is integer, and the value is string:
        for(int i=0;i<100;i++) stl_map.erase(data[i].data_i);
    }
    mTimerEnd("STL map");
-
+   
    mTimerBegin("STL unordered_map");
    for(int n=0;n<10000;n++)
    {
@@ -478,7 +478,7 @@ Test with the key is integer, and the value is string:
        for(int i=0;i<100;i++) stl_unorderedmap.erase(data[i].data_i);
    }
    mTimerEnd("STL unordered_map");
-
+   
    mTimerBegin("Morn map");
    for(int n=0;n<10000;n++)
    {
@@ -515,7 +515,7 @@ Test with the key is ordered integer, and the value is string:
        for(int i=0;i<100;i++) stl_map.erase(i);
    }
    mTimerEnd("STL map");
-
+   
    mTimerBegin("STL unordered_map");
    for(int n=0;n<10000;n++)
    {
@@ -524,7 +524,7 @@ Test with the key is ordered integer, and the value is string:
        for(int i=0;i<100;i++) stl_unorderedmap.erase(i);
    }
    mTimerEnd("STL unordered_map");
-
+   
    mTimerBegin("Morn map");
    for(int n=0;n<10000;n++)
    {
@@ -555,35 +555,35 @@ Test for large amount of data with key is string and value is integer:
    mTimerBegin("STL map write");
    for(int i=0;i<number;i++) stl_map[data[i].data_s]=data[i].data_i;
    mTimerEnd("STL map write");
-
+   
    mTimerBegin("STL unordered_map write");
    for(int i=0;i<number;i++) stl_unorderedmap[data[i].data_s]=data[i].data_i;
    mTimerEnd("STL unordered_map write");
-
+   
    mTimerBegin("Morn map write");
    for(int i=0;i<number;i++) mMapWrite(morn_map,data[i].data_s,DFLT,&(data[i].data_i),sizeof(int));
    mTimerEnd("Morn map write");
-
+   
    mTimerBegin("STL map read");
    for(int i=0;i<number;i++) int data_i = stl_map.find(data[i].data_s)->second;
    mTimerEnd("STL map read");
-
+   
    mTimerBegin("STL unordered_map read");
    for(int i=0;i<number;i++) int data_i = stl_unorderedmap.find(data[i].data_s)->second;
    mTimerEnd("STL unordered_map read");
-
+   
    mTimerBegin("Morn map read");
    for(int i=0;i<number;i++) int *data_i = (int *)mMapRead(morn_map,data[i].data_s);
    mTimerEnd("Morn map read");
-
+   
    mTimerBegin("STL map erase");
    for(int i=0;i<number;i++) stl_map.erase(data[i].data_s);
    mTimerEnd("STL map erase");
-
+   
    mTimerBegin("STL unordered_map erase");
    for(int i=0;i<number;i++) stl_unorderedmap.erase(data[i].data_s);
    mTimerEnd("STL unordered_map erase");
-
+   
    mTimerBegin("Morn map delete");
    for(int i=0;i<number;i++) mMapNodeDelete(morn_map,data[i].data_s);
    mTimerEnd("Morn map delete");
@@ -605,40 +605,40 @@ Test for large amount of data with key is integer and value is string:
 
 .. code:: c
 
-   mTimerBegin("STL map write");
-   for(int i=0;i<number;i++) stl_map[data[i].data_i]=data[i].data_s;
-   mTimerEnd("STL map write");
-   
-   mTimerBegin("STL unordered_map write");
-   for(int i=0;i<number;i++) stl_unorderedmap[data[i].data_i]=data[i].data_s;
-   mTimerEnd("STL unordered_map write");
-   
-   mTimerBegin("Morn map write");
-   for(int i=0;i<number;i++) mMapWrite(morn_map,&(data[i].data_i),sizeof(int),data[i].data_s,DFLT);
-   mTimerEnd("Morn map write");
-   
-   mTimerBegin("STL map read");
-   for(int i=0;i<number;i++) std::string data_s = stl_map.find(data[i].data_i)->second;
-   mTimerEnd("STL map read");
-   
-   mTimerBegin("STL unordered_map read");
-   for(int i=0;i<number;i++) std::string data_s = stl_unorderedmap.find(data[i].data_i)->second;
-   mTimerEnd("STL unordered_map read");
-   
-   mTimerBegin("Morn map read");
-   for(int i=0;i<number;i++) char *data_s = (char *)mMapRead(morn_map,&(data[i].data_i),sizeof(int),NULL,DFLT);
-   mTimerEnd("Morn map read");
-   
-   mTimerBegin("STL map erase");
-   for(int i=0;i<number;i++) stl_map.erase(data[i].data_i);
-   mTimerEnd("STL map erase");
-   
-   mTimerBegin("STL unordered_map erase");
-   for(int i=0;i<number;i++) stl_unorderedmap.erase(data[i].data_i);
-   mTimerEnd("STL unordered_map erase");
-   
-   mTimerBegin("Morn map delete");
-   for(int i=0;i<number;i++) mMapNodeDelete(morn_map,&(data[i].data_i),sizeof(int));
+   mTimerBegin("STL map write");
+   for(int i=0;i<number;i++) stl_map[data[i].data_i]=data[i].data_s;
+   mTimerEnd("STL map write");
+   
+   mTimerBegin("STL unordered_map write");
+   for(int i=0;i<number;i++) stl_unorderedmap[data[i].data_i]=data[i].data_s;
+   mTimerEnd("STL unordered_map write");
+   
+   mTimerBegin("Morn map write");
+   for(int i=0;i<number;i++) mMapWrite(morn_map,&(data[i].data_i),sizeof(int),data[i].data_s,DFLT);
+   mTimerEnd("Morn map write");
+   
+   mTimerBegin("STL map read");
+   for(int i=0;i<number;i++) std::string data_s = stl_map.find(data[i].data_i)->second;
+   mTimerEnd("STL map read");
+   
+   mTimerBegin("STL unordered_map read");
+   for(int i=0;i<number;i++) std::string data_s = stl_unorderedmap.find(data[i].data_i)->second;
+   mTimerEnd("STL unordered_map read");
+   
+   mTimerBegin("Morn map read");
+   for(int i=0;i<number;i++) char *data_s = (char *)mMapRead(morn_map,&(data[i].data_i),sizeof(int),NULL,DFLT);
+   mTimerEnd("Morn map read");
+   
+   mTimerBegin("STL map erase");
+   for(int i=0;i<number;i++) stl_map.erase(data[i].data_i);
+   mTimerEnd("STL map erase");
+   
+   mTimerBegin("STL unordered_map erase");
+   for(int i=0;i<number;i++) stl_unorderedmap.erase(data[i].data_i);
+   mTimerEnd("STL unordered_map erase");
+   
+   mTimerBegin("Morn map delete");
+   for(int i=0;i<number;i++) mMapNodeDelete(morn_map,&(data[i].data_i),sizeof(int));
    mTimerEnd("Morn map delete");
 
 We test 100000 key-value nodes and 1000000 key-value nodes, Output is:

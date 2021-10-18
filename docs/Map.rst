@@ -70,8 +70,8 @@ also be set DFLT.
 
 The return is a pointer to value of map node written in the memory.
 
-Note: for one key-value node, the key must be unique. If two key-value
-nodes have the same key, the last one will override the previous one.
+.. note::
+   for key-value node, the key must be unique. If two key-value nodes have the same key, the last one will override the previous one.
 
 .. _header-n34:
 
@@ -129,8 +129,8 @@ must be:
 
 ``para`` is the parameter of ``func``.
 
-Note: map node is ordered by key. So when operate the key-value node,
-the key must not be changed.
+.. note::
+   map node is ordered by key. So when operate the key-value node, the key must not be changed.
 
 .. _header-n51:
 

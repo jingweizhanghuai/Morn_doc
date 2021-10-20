@@ -16,9 +16,9 @@ The source code of Morn sort is
 
 Tips:
 
-"Generic" is supported，**``Type`` can be ``int8_t``, ``uint8_t``,
+"Generic" is supported，``Type`` can be ``int8_t``, ``uint8_t``,
 ``int16_t``, ``uint16_t``, ``int32_t``, ``uint32_t``, ``int64_t``,
-``uint64_t``, ``float`` or ``double``**.
+``uint64_t``, ``float`` or ``double``.
 
 .. _header-n7:
 
@@ -263,7 +263,7 @@ sorting 10000 data for 1000times, 3.sorting 100000 data for 100 times,
 
 |image1|
 
-It can be seen that: **1. ``std::sort`` and ``mAscSort`` in Morn is the
+It can be seen that: 1. ``std::sort`` **and** ``mAscSort`` **in Morn is the
 fastest**, 2.for small amount of data, ``gsl_sort`` is faster then
 ``qsort``, but for the large amount of data ``qsort`` is faster.
 
@@ -363,7 +363,7 @@ from 10000000 for 1 times. The testing code is:
 
 |image3|
 
-It shows that: **``mMinSubset`` and ``std::nth_element`` perform at
+It shows that: ``mMinSubset`` **and** ``std::nth_element`` **perform at
 roughly the same level**.
 
 .. note::

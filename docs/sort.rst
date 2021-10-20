@@ -16,7 +16,7 @@ The source code of Morn sort is
 
 Tips:
 
-"Generic" is supported，\ **``Type``\ can be ``int8_t``, ``uint8_t``,
+"Generic" is supported，**``Type`` can be ``int8_t``, ``uint8_t``,
 ``int16_t``, ``uint16_t``, ``int32_t``, ``uint32_t``, ``int64_t``,
 ``uint64_t``, ``float`` or ``double``**.
 
@@ -35,18 +35,18 @@ Ascending Sort
 ``data_in`` is the input data before sort, and ``data_out`` is the
 output after sort.
 
-when\ ``data_out`` is equal as ``data_in`` (or ``data_out`` is not set,
-or ``data_out``\ ==NULL), the output data will overwrite the input.
+when ``data_out`` is equal as ``data_in`` (or ``data_out`` is not set,
+or ``data_out`` ==NULL), the output data will overwrite the input.
 
 ``index_in`` is the index of ``data_in``, ``index_out`` is output index
 for ``data_out``.
 
 If neither is set(or both are set NULL), it means index is not care.
 
-If ``index_in``\ ==NULL and ``index_out``!=NULL, the default ascending
+If ``index_in`` ==NULL and ``index_out``!=NULL, the default ascending
 order(0, 1, 2, 3 etc.) is used.
 
-If ``index_out``\ ==\ ``index_in`` or ``index_out``\ ==NULL, the output
+If ``index_out`` == ``index_in`` or ``index_out`` ==NULL, the output
 index will overwrite the input.
 
 ``num`` is the number of input.
@@ -81,7 +81,7 @@ Descending Sort
    void mDescSort(Type *data_in,Type *data_out,int *index_out,int num);
    void mDescSort(Type *data_in,int *index_in,Type *data_out,int *index_out,int num);
 
-It is same with ``mAscSort``\ 。
+It is same with ``mAscSort``.
 
 for example:
 
@@ -106,8 +106,6 @@ Output is:
 Minimum Subset
 ~~~~~~~~~~~~~~
 
-也就是从num\ *in个数据里，取出num*\ out个最小的数（注意：取出的数并非按照大小顺序排列）。
-
 .. code:: c
 
    Type mMinSubset(Type,Type *data_in,int num_in,int num_out);
@@ -117,14 +115,14 @@ Minimum Subset
 
 This is used to selected ``num_out`` smallest from all ``num_in`` data.
 
-Note:
+.. note::
 
-The data selected is not sorted in order.
+   The data selected is not sorted in order.
 
 ``data_in``, ``data_out``, ``index_in``, ``index_out`` is same with
 ``mAscSort`` and ``mDescSort``
 
-The return value is the threshold, the maximum one in all output data.
+The return value is the threshold, which is the largest one in all output data.
 
 For example:
 
@@ -160,7 +158,7 @@ Maximum Subset
 
 it is same with ``mMinSubset``.
 
-The return value is the threshold, the Minimum one in all output data.
+The return value is the threshold, which is the smallest one in all output data.
 
 For example:
 
@@ -189,14 +187,14 @@ Sort List Element
 
 All above APIs is for types of number, and Morn provides ``mListSort``
 for ``MList``, which is a data containers for all types. See
-`MList <Morn：容器2>`__ for details.
+`MList <Morn:MList2>`__ for details.
 
 .. _header-n54:
 
 Performance
 -----------
 
-Complete testing code is：\ `test_sort2.cpp <../test/test_sort2.cpp>`__.
+Complete testing code is: `test_sort2.cpp <../test/test_sort2.cpp>`__.
 Compile command is:
 
 .. code:: shell
@@ -216,45 +214,45 @@ Testing Code is:
 
 .. code:: c
 
-   #include <algorithm>
-   #include <gsl/gsl_sort_double.h>
-   #include "morn_math.h"
-   
-   int compare(const void *v1, const void *v2) {return ((*((double *)v1))>(*((double *)v2)))?1:-1;}
-   void test1()
-   {
-       double *data1= (double *)mMalloc(10000000* sizeof(double));
-       double *data2= (double *)mMalloc(10000000* sizeof(double));
-       double *data3= (double *)mMalloc(10000000* sizeof(double));
-       double *data4= (double *)mMalloc(10000000* sizeof(double));
-       
-       for(int n=1000;n<=10000000;n*=10)
-       {
-           printf("\n%d data sort for %d times:\n",n,10000000/n);
-           for(int i=0;i<10000000;i++)
-           {
-               data1[i]=((double)mRand(-10000000,10000000))/((double)mRand(1,10000));
-               data2[i]=data1[i];data3[i]=data1[i];data4[i]=data1[i];
-           }
-           
-           mTimerBegin("qsort");
-           for(int i=0;i<10000000;i+=n) qsort(data1+i,n,sizeof(double),compare);
-           mTimerEnd("qsort");
-           
-           mTimerBegin("gsl");
-           for(int i=0;i<10000000;i+=n) gsl_sort(data2+i,1,n);
-           mTimerEnd("gsl");
-           
-           mTimerBegin("stl");
-           for(int i=0;i<10000000;i+=n) std::sort(data3+i,data3+i+n);
-           mTimerEnd("stl");
-           
-           mTimerBegin("Morn");
-           for(int i=0;i<10000000;i+=n) mAscSort(data4+i,n);
-           mTimerEnd("Morn");
-       }
-       
-       mFree(data1); mFree(data2); mFree(data3); mFree(data4);
+   #include <algorithm>
+   #include <gsl/gsl_sort_double.h>
+   #include "morn_math.h"
+   
+   int compare(const void *v1, const void *v2) {return ((*((double *)v1))>(*((double *)v2)))?1:-1;}
+   void test1()
+   {
+       double *data1= (double *)mMalloc(10000000* sizeof(double));
+       double *data2= (double *)mMalloc(10000000* sizeof(double));
+       double *data3= (double *)mMalloc(10000000* sizeof(double));
+       double *data4= (double *)mMalloc(10000000* sizeof(double));
+    
+       for(int n=1000;n<=10000000;n*=10)
+       {
+           printf("\n%d data sort for %d times:\n",n,10000000/n);
+           for(int i=0;i<10000000;i++)
+           {
+               data1[i]=((double)mRand(-10000000,10000000))/((double)mRand(1,10000));
+               data2[i]=data1[i];data3[i]=data1[i];data4[i]=data1[i];
+           }
+           
+           mTimerBegin("qsort");
+           for(int i=0;i<10000000;i+=n) qsort(data1+i,n,sizeof(double),compare);
+           mTimerEnd("qsort");
+           
+           mTimerBegin("gsl")
+           for(int i=0;i<10000000;i+=n) gsl_sort(data2+i,1,n);
+           mTimerEnd("gsl");
+           
+           mTimerBegin("stl");
+           for(int i=0;i<10000000;i+=n) std::sort(data3+i,data3+i+n);
+           mTimerEnd("stl");
+           
+           mTimerBegin("Morn");
+           for(int i=0;i<10000000;i+=n) mAscSort(data4+i,n);
+           mTimerEnd("Morn");
+       }
+       
+       mFree(data1); mFree(data2); mFree(data3); mFree(data4);
    }
 
 In above program, we firstly generate some random double data, and then
@@ -265,7 +263,7 @@ sorting 10000 data for 1000times, 3.sorting 100000 data for 100 times,
 
 |image1|
 
-It can be seen that: **1.\ ``std::sort`` and ``mAscSort`` in Morn is the
+It can be seen that: **1. ``std::sort`` and ``mAscSort`` in Morn is the
 fastest**, 2.for small amount of data, ``gsl_sort`` is faster then
 ``qsort``, but for the large amount of data ``qsort`` is faster.
 
@@ -317,11 +315,11 @@ sorting 10000 data for 1000times, 3.sorting 100000 data for 100 times,
 Obviously: **Morn sort is faster than GSL**. And as the amount
 increases, the speed gap widens.
 
-Note:
+.. note::
 
-``gsl_sort_index`` and ``mAscSort`` are different with:
-``gsl_sort_index`` Outputs only sorted index, without sorted data, But
-``mAscSort`` Outputs sorted data and sorted index.
+   ``gsl_sort_index`` and ``mAscSort`` are different with:
+   ``gsl_sort_index`` Outputs only sorted index, without sorted data, But
+   ``mAscSort`` Outputs sorted data and sorted index.
 
 .. _header-n72:
 
@@ -358,22 +356,22 @@ C++ STL. Test code is:
    }
 
 In above program, we generate some double data, and then test:
-1.selecting 10000\30000\50000\70000\90000 data from 100000 for 100
-times, 2.selecting 100000\300000\500000\700000\900000 data from 1000000
-for 10 times, 3.selecting 1000000\3000000\5000000\7000000\9000000 data
+1.selecting 10000, 30000, 50000, 70000, 90000 data from 100000 for 100
+times, 2.selecting 100000, 300000, 500000, 700000, 900000 data from 1000000
+for 10 times, 3.selecting 1000000, 3000000, 5000000, 7000000, 9000000 data
 from 10000000 for 1 times. The testing code is:
 
 |image3|
 
-It shows that: **``mMinSubset``\ and ``std::nth_element`` perform at
+It shows that: **``mMinSubset`` and ``std::nth_element`` perform at
 roughly the same level**.
 
-Note:
+.. note::
 
-``mMinSubset`` and ``std::nth_element`` have some difference. For top-N
-program, these 2 functions all output unsorted subset, but
-``std::nth_element`` outputs the threshold in array position n,
-:literal:`\`mMinSubset` outputs the threshold as return.
+   ``mMinSubset`` and ``std::nth_element`` have some difference. For top-N
+   program, these 2 functions all output unsorted subset, but
+   ``std::nth_element`` outputs the threshold in array position n,
+   ``mMinSubset` outputs the threshold as return.
 
 And then, we compared ``mMinSubset`` in Morn and ``gsl_sort_smallest``
 in GSL. Testing code is:
@@ -398,18 +396,18 @@ in GSL. Testing code is:
        mFree(in); mFree(out1); mFree(out2);
    }
 
-Here, we select 100000/300000/500000/700000/900000 data from 1000000.
+Here, we select 100000, 300000, 500000, 700000, 900000 data from 1000000.
 Output is:
 
 |image4|
 
 It shows that: gap of time-consuming between Morn and GSL is huge.
 
-Note:
+.. note::
 
-``gsl_sort_smallest`` and ``mMinSubset`` are different: the output of
-``gsl_sort_smallest`` is sorted, which is similarity as
-``std::partial_sort``, and the output of ``mMinSubset`` is unsorted.
+   ``gsl_sort_smallest`` and ``mMinSubset`` are different: the output of
+   ``gsl_sort_smallest`` is sorted, which is similarity as
+   ``std::partial_sort``, and the output of ``mMinSubset`` is unsorted.
 
 .. _header-n88:
 
@@ -439,18 +437,18 @@ in GSL. Testing code is:
        mFree(in); mFree(out1); mFree(out2);
    }
 
-Here, we select 100000/30000/500000/700000/900000 largest data from
+Here, we select 100000, 30000, 500000, 700000, 900000 largest data from
 1000000. Testing code is:
 
 |image5|
 
 Obviously: Morn is much faster then GSL.
 
-Note:
+.. note::
 
-``gsl_sort_largest_index`` and ``mMaxSubset`` are also different:
-``gsl_sort_largest_index`` output only index, and it is sorted,
-``mMaxSubset`` outputs the index and data, but it is unsorted.
+   ``gsl_sort_largest_index`` and ``mMaxSubset`` are also different:
+   ``gsl_sort_largest_index`` output only index, and it is sorted,
+   ``mMaxSubset`` outputs the index and data, but it is unsorted.
 
 .. |image1| image:: https://z3.ax1x.com/2021/04/11/c0WVPA.png
    :target: https://imgtu.com/i/c0WVPA

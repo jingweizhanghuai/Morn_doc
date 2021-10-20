@@ -7,6 +7,7 @@ Contents:
    :maxdepth: 1
    :glob:
 
+   sort
    json
    Map
 

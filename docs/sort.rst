@@ -194,7 +194,7 @@ for ``MList``, which is a data containers for all types. See
 Performance
 -----------
 
-Complete testing code is: `test_sort2.cpp <../test/test_sort2.cpp>`__.
+Complete testing code is: `test_sort2.cpp <https://github.com/jingweizhanghuai/Morn/blob/master/test/test_sort2.cpp>`__.
 Compile command is:
 
 .. code:: shell
@@ -207,7 +207,7 @@ Data Sort
 ~~~~~~~~~
 
 Here, we compared Morn with other 3 libraries: ``qsort`` in C standard
-library, ``gsl_sort`` in GSL(The GNU Scientific Library) and
+library, ``gsl_sort`` in `GSL(The GNU Scientific Library) <https://www.gnu.org/software/gsl/>`__ and
 ``std::sort`` in C++ STL.
 
 Testing Code is:
@@ -272,7 +272,7 @@ fastest**, 2.for small amount of data, ``gsl_sort`` is faster then
 Sort with Index
 ~~~~~~~~~~~~~~~
 
-Here we compared ``mAscSort`` in Morn and ``gsl_sort_index`` in GSL.
+Here we compared ``mAscSort`` in Morn and ``gsl_sort_index`` in `GSL <https://www.gnu.org/software/gsl/>`__.
 Testing code is:
 
 .. code:: c
@@ -374,7 +374,7 @@ roughly the same level**.
    ``mMinSubset` outputs the threshold as return.
 
 And then, we compared ``mMinSubset`` in Morn and ``gsl_sort_smallest``
-in GSL. Testing code is:
+in `GSL <https://www.gnu.org/software/gsl/>`__. Testing code is:
 
 .. code:: c
 
@@ -401,7 +401,7 @@ Output is:
 
 |image4|
 
-It shows that: gap of time-consuming between Morn and GSL is huge.
+It shows that: gap of time-consuming between Morn and `GSL <https://www.gnu.org/software/gsl/>`__ is huge.
 
 .. note::
 
@@ -415,7 +415,7 @@ Select Minimum/Maximum Subset with Index
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here we compared ``mMaxSubset`` in Morn and ``gsl_sort_largest_index``
-in GSL. Testing code is:
+in `GSL <https://www.gnu.org/software/gsl/>`__. Testing code is:
 
 .. code:: c
 
@@ -442,7 +442,7 @@ Here, we select 100000, 30000, 500000, 700000, 900000 largest data from
 
 |image5|
 
-Obviously: Morn is much faster then GSL.
+Obviously: Morn is much faster then `GSL <https://www.gnu.org/software/gsl/>`__.
 
 .. note::
 

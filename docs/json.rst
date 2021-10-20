@@ -3,11 +3,11 @@
 JSON
 ====
 
-Morn provides library for parsing JSON files. JSON parsing with Morn is
+Morn provides a library for parsing JSON files. It is
 **simple** (with only two interfaces) and **fast** (much faster than
 RapidJSON) .
 
-This is a typical JSON file (which we will take as an example) :
+This is a typical JSON string, We will take it as an example:
 
 .. code:: json
 
@@ -45,10 +45,9 @@ This is a typical JSON file (which we will take as an example) :
        }
    }
 
-A JSON string is formed by JSON nodes which combined according rules.
-The JSON node is the basic structure in Morn, These nodes have different
-types, such as key-value or single value. in Morn we define these types
-as:
+JSON string is formed by nodes with according rules.
+JSON node is the basic structure in Morn, These nodes have different
+types as key-value or single-value. We define these types as:
 
 .. code:: c
 
@@ -101,7 +100,7 @@ Load and Parse JSON
    struct JSONNode *mJSONLoad(MString *jsondata);
 
 With the input is a JSON file or a JSON string, the output is the parsed
-top-level JSON node.
+root node.
 
 This is a simple example：
 
@@ -121,8 +120,7 @@ or:
    ...
    mStringRelease(string);
 
-For file parsing, you can use ``mJSONLoad`` directly, or you can read
-the file and parse as string.
+For file parsing, you can use ``mJSONLoad`` directly, or can read file and parse it as JSON string.
 
 .. _header-n20:
 
@@ -139,10 +137,10 @@ Read JSON Node
    struct JSONNode *mJSONRead(struct JSONNode *node,const char *key,struct JSONNode *dst);
 
 The input node must with type of list(``JSON_LIST`` or 
-``JSON_KEY_LIST``\ ）or array(``JSON_ARRAY`` or ``JSON_KEY_ARRAY``)，The
-return value is NULL on read failure.
+``JSON_KEY_LIST``\ ）or array(``JSON_ARRAY`` or ``JSON_KEY_ARRAY``)，It
+returns NULL on read failure.
 
-This interface has three forms:
+For example:
 
 .. code:: c
 
@@ -153,7 +151,7 @@ This interface has three forms:
    child = mJSONRead(mother,"child5"); //mother is list, read the node with key is "child5"
    child = mJSONRead(mother,"a.b[3].c.d[6]");   //read further child node
 
-or:
+or you also can write it as:
 
 .. code:: c
 
@@ -172,8 +170,8 @@ Example
 The full example file is
 `test_JSON_file.c <https://github.com/jingweizhanghuai/Morn/blob/master/test/test_JSON_file.c>`__
 
-Taking the JSON file at the beginning of this article as an example, you
-can read it using the following program:
+Taking the JSON file at the beginning as an example, it can be read 
+as following:
 
 .. code:: c
 
@@ -196,7 +194,7 @@ can read it using the following program:
        mFileRelease(file);
    }
 
-in this example two node has been read, root node and "hello" node. the
+in this example, two nodes have been read: root-node and hello-node. The
 output is:
 
 .. code:: 
@@ -207,7 +205,7 @@ output is:
    node->key=hello
    node->string=world
 
-Node read can be written in following forms as required:
+Code can also be written as following forms:
 
 .. code:: c
 
@@ -228,7 +226,7 @@ Node read can be written in following forms as required:
    double *pi=(double *)mJSONRead(json,"pi");
    printf("pi=%lf\n",*pi);
 
-the output is:
+Output is:
 
 .. code:: 
 
@@ -237,14 +235,14 @@ the output is:
    i=123
    pi=3.141592
 
-Note here that ``nul`` will be understood as null string:
+Note here that: ``nul`` will be understood as a null string:
 
 .. code:: c
 
    node = mJSONRead(json,"n");
    printf("type=%s,nul=%p\n",jsontype[node->type],node->string);
 
-the output is:
+Output is:
 
 .. code:: 
 
@@ -262,7 +260,7 @@ For further child node, it can be read layer by layer, for example:
    struct JSONNode *day=mJSONRead(node,"day");
    printf("date.day=%d,type=%s\n",day->dataS32,mJSONNodeType(day));
 
-Or it can be read cross layers:
+Or it also can be read cross layers:
 
 .. code:: c
 
@@ -278,12 +276,13 @@ Output of these above two programs is:
 .. code:: 
 
    date.year=2021,type=KEY_INT
-
    date.month=June,type=KEY_STRING
-
    date.day=5,type=KEY_INT
 
-There are several flexible forms for reading node from arrays:
+.. tip:: 
+   If you want to traverse all the child nodes, Read layer-by-layer is faster than reading cross layers.
+
+Several flexible forms for reading from arrays are provided:
 
 .. code:: c
 
@@ -307,8 +306,7 @@ Output is:
    a1[2]=2
    a1[3]=3
 
-You can read multidimensional array as further child with cross layers
-read:
+Multidimensional Array can also be read as further child with cross layers read:
 
 .. code:: c
 
@@ -338,7 +336,7 @@ Output is:
    10,11,12,13,
    20,21,22,23,
 
-Node can also be read from mixed list and array:
+Node can be read from mixed list and array as:
 
 .. code:: c
 
@@ -365,7 +363,7 @@ Performance
 Complete test file is
 `test_JSON_file2.cpp <https://github.com/jingweizhanghuai/Morn/blob/master/test/test_JSON_file2.cpp>`__
 
-In this performance test, Morn is compared with:
+Here, Morn is compared with:
 `cjson <https://github.com/DaveGamble/cJSON>`__\ 、\ `jsoncpp <https://github.com/open-source-parsers/jsoncpp>`__\ 、\ `nlohmann <https://github.com/nlohmann/json>`__\ 、\ `rapidjson <https://github.com/Tencent/rapidjson>`__\ 、\ `yyjson <https://github.com/ibireme/yyjson>`__
 
 .. _header-n72:
@@ -373,9 +371,9 @@ In this performance test, Morn is compared with:
 Test 1
 ~~~~~~
 
-Testing parse
+Parsing
 `citm_catalog.json <https://github.com/miloyip/nativejson-benchmark/blob/master/data/citm_catalog.json>`__,
-and read the "areaId", then measure time-consume of parse and read. This
+and reading "areaId" in file, then measure time-consume of parsing and reading. This
 is a part of the program (using Morn)：
 
 .. code:: c
@@ -428,10 +426,10 @@ Result is:
 Test 2
 ~~~~~~
 
-Testing parse
+parsing
 `canada.json <https://github.com/miloyip/nativejson-benchmark/blob/master/data/canada.json>`__
-and read all of coordinates, then measure time-consume of parse and
-read. This is a part of the program (using Morn)：
+and reading all of coordinates, then measure time-consume of parsing and
+reading. This is a part of the program (using Morn)：
 
 .. code:: c
 
@@ -472,8 +470,8 @@ Result is:
 
 |image2|
 
-Thus it can be seen: rapidjson/yyjson/Morn is much faster than other
-json library (cjson is OK in Test 1,but is slowest in test 2), and
+Thus it can be seen: 1. rapidjson/yyjson/Morn is much faster than other
+json library (cjson is OK in Test 1,but is slowest in test 2), 2. 
 yyjson and Morn is faster than rapidjson.
 
 .. _header-n85:
@@ -481,16 +479,16 @@ yyjson and Morn is faster than rapidjson.
 Test 3
 ~~~~~~
 
-Comparing the performance of rapidjson yyjson and Morn with many
+Comparing the performance of rapidjson, yyjson and Morn with many
 different json file. rapidjson and yyjson are known for high performance
 JSON parse.
 
-The testing file are: canada.json
-citm_catalog.json `twitter.json <https://github.com/chadaustin/sajson/blob/master/testdata/twitter.json>`__
-`github_events.json <https://github.com/chadaustin/sajson/blob/master/testdata/github_events.json>`__
-`apache_builds.json <https://github.com/chadaustin/sajson/blob/master/testdata/apache_builds.json>`__
-`mesh.json <https://github.com/chadaustin/sajson/blob/master/testdata/mesh.json>`__
-`mesh.pretty.json <https://github.com/chadaustin/sajson/blob/master/testdata/mesh.pretty.json>`__
+The testing file are: canada.json, 
+citm_catalog.json `twitter.json <https://github.com/chadaustin/sajson/blob/master/testdata/twitter.json>`__, 
+`github_events.json <https://github.com/chadaustin/sajson/blob/master/testdata/github_events.json>`__, 
+`apache_builds.json <https://github.com/chadaustin/sajson/blob/master/testdata/apache_builds.json>`__, 
+`mesh.json <https://github.com/chadaustin/sajson/blob/master/testdata/mesh.json>`__, 
+`mesh.pretty.json <https://github.com/chadaustin/sajson/blob/master/testdata/mesh.pretty.json>`__, 
 and
 `update-center.json <https://github.com/chadaustin/sajson/blob/master/testdata/update-center.json>`__
 
@@ -501,97 +499,99 @@ Testing program is:
 
 .. code:: c
 
-   void rapidjson_test3(const char *filename,int n)
+   #define TEST_TIME 100
+
+   void rapidjson_test3(const char *filename)
    {
        MString *jsondata=mObjectCreate();
+       mFile(jsondata,filename);
+   
        mTimerBegin("rapidjson");
-       for(int i=0;i<n;i++)
+       for(int i=0;i<TEST_TIME;i++)
        {
-           mFile(jsondata,filename);
            rapidjson::Document doc;
            doc.Parse(jsondata->string);
        }
        mTimerEnd("rapidjson");
        mObjectRelease(jsondata);
    }
-
-   void yyjson_test3(const char *filename,int n)
+   
+   void yyjson_test3(const char *filename)
    {
        MString *jsondata=mObjectCreate();
+       mFile(jsondata,filename);
+   
        mTimerBegin("yyjson");
-       for(int i=0;i<n;i++)
-       {
-           mFile(jsondata,filename);
+       for(int i=0;i<TEST_TIME;i++)
            yyjson_doc_get_root(yyjson_read(jsondata->string,jsondata->size-1,0));
-       }
        mTimerEnd("yyjson");
        mObjectRelease(jsondata);
    }
-
-   void Morn_test3(const char *filename,int n)
+   
+   void Morn_test3(const char *filename)
    {
        MString *jsondata=mObjectCreate();
+       mFile(jsondata,filename);
+   
        mTimerBegin("Morn json");
-       for(int i=0;i<n;i++)
-       {
-           mFile(jsondata,filename);
+       for(int i=0;i<TEST_TIME;i++)
            mJSONLoad(jsondata);
-       }
        mTimerEnd("Morn json");
        mObjectRelease(jsondata);
    }
-
+   
    void test3()
    {
        const char *filename;
-
+   
        filename = "./canada.json";
        printf("\nfor %s:\n",filename);
-       rapidjson_test3(filename,100);
-       yyjson_test3(filename,100);
-       Morn_test3(filename,100);
-
+       rapidjson_test3(filename);
+       yyjson_test3(filename);
+       Morn_test3(filename);
+   
        filename = "./citm_catalog.json";
        printf("\nfor %s:\n",filename);
-       rapidjson_test3(filename,100);
-       yyjson_test3(filename,100);
-       Morn_test3(filename,100);
-
+       rapidjson_test3(filename);
+       yyjson_test3(filename);
+       Morn_test3(filename);
+       
+   
        filename = "./testdata/twitter.json";
        printf("\nfor %s:\n",filename);
-       rapidjson_test3(filename,100);
-       yyjson_test3(filename,100);
-       Morn_test3(filename,100);
-
+       rapidjson_test3(filename);
+       yyjson_test3(filename);
+       Morn_test3(filename);
+   
        filename = "./testdata/github_events.json";
        printf("\nfor %s:\n",filename);
-       rapidjson_test3(filename,100);
-       yyjson_test3(filename,100);
-       Morn_test3(filename,100);
-
+       rapidjson_test3(filename);
+       yyjson_test3(filename);
+       Morn_test3(filename);
+   
        filename = "./testdata/apache_builds.json";
        printf("\nfor %s:\n",filename);
-       rapidjson_test3(filename,100);
-       yyjson_test3(filename,100);
-       Morn_test3(filename,100);
-
+       rapidjson_test3(filename);
+       yyjson_test3(filename);
+       Morn_test3(filename);
+   
        filename = "./testdata/mesh.json";
        printf("\nfor %s:\n",filename);
-       rapidjson_test3(filename,100);
-       yyjson_test3(filename,100);
-       Morn_test3(filename,100);
-
+       rapidjson_test3(filename);
+       yyjson_test3(filename);
+       Morn_test3(filename);
+   
        filename = "./testdata/mesh.pretty.json";
        printf("\nfor %s:\n",filename);
-       rapidjson_test3(filename,100);
-       yyjson_test3(filename,100);
-       Morn_test3(filename,100);
-
+       rapidjson_test3(filename);
+       yyjson_test3(filename);
+       Morn_test3(filename);
+   
        filename = "./testdata/update-center.json";
        printf("\nfor %s:\n",filename);
-       rapidjson_test3(filename,100);
-       yyjson_test3(filename,100);
-       Morn_test3(filename,100);
+       rapidjson_test3(filename);
+       yyjson_test3(filename);
+       Morn_test3(filename);
    }
 
 Result is:

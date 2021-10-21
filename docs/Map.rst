@@ -445,7 +445,7 @@ key-value nodes with 100 times. The Output is:
 
 |image1|
 
-Thus: **when key is string `Morn <https://github.com/jingweizhanghuai/Morn>`__ is faster then std::map and
+Thus: **when key is string Morn is faster then std::map and
 std::unorderd_map**\ 。
 
 .. _header-n89:
@@ -491,7 +491,7 @@ key-value nodes with 100 times. The Output is:
 
 |image2|
 
-Thus: **when key is integer, `Morn <https://github.com/jingweizhanghuai/Morn>`__ is faster than std::map and
+Thus: **when key is integer, Morn is faster than std::map and
 std::unorderd_map**.
 
 .. _header-n95:
@@ -537,7 +537,7 @@ key-value nodes with 100 times. The Output is:
 
 |image3|
 
-Thus: **when key is integer, `Morn <https://github.com/jingweizhanghuai/Morn>`__ is faster than std::map and
+Thus: **when key is integer, Morn is faster than std::map and
 std::unorderd_map**.
 
 .. _header-n101:
@@ -590,7 +590,7 @@ We test 100000 key-value nodes and 1000000 key-value nodes, Output is:
 |image4|
 
 It can be seen that: **for large amount of data, when key is string,
-`Morn <https://github.com/jingweizhanghuai/Morn>`__ is faster than std::map. But if there is millions of nodes, `Morn <https://github.com/jingweizhanghuai/Morn>`__
+Morn is faster than std::map. But if there is millions of nodes, Morn
 will fall behind of std::unorderd_map**.
 
 .. _header-n107:
@@ -643,12 +643,12 @@ We test 100000 key-value nodes and 1000000 key-value nodes, Output is:
 |image5|
 
 It can be seen that: **for large amount of data, when key is integer,
-std::unorderd_map is faster than `Morn <https://github.com/jingweizhanghuai/Morn>`__ map. And if there is millions of
-nodes, `Morn <https://github.com/jingweizhanghuai/Morn>`__ will fall behind of std::map**.
+std::unorderd_map is faster than Morn map. And if there is millions of
+nodes, Morn will fall behind of std::map**.
 
-The above tests show that: 1. `Morn <https://github.com/jingweizhanghuai/Morn>`__ has extreme performance when the data
-amount is not too large(<100000). 2. `Morn <https://github.com/jingweizhanghuai/Morn>`__ has high performance when the
-key type is string, struct, array and other complex types.
+The above tests show that: **1. Morn has extreme performance when the data
+amount is not too large(<100000). 2. Morn has high performance when the
+key type is string, struct, array and other complex types.**
 
 .. |image1| image:: https://z3.ax1x.com/2021/04/12/c0HZGD.png
    :target: https://imgtu.com/i/c0HZGD

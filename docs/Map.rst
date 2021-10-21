@@ -13,7 +13,7 @@ Key and value can be any types (integer, float, string, array, pointer or stuct)
 
 The `Morn <https://github.com/jingweizhanghuai/Morn>`__ map has following characteristics:
 
--  mixed types supported
+-  mixed types is supported
 
 -  high-performance
 
@@ -21,12 +21,14 @@ The `Morn <https://github.com/jingweizhanghuai/Morn>`__ map has following charac
 
 -  lightweight algorithm(with about 250 lines codes)
 
-The source code is `morn_map.c <../src/util/morn_map.c>`__
 
 .. _header-n18:
 
 API
 ---
+The source code of `Morn <https://github.com/jingweizhanghuai/Morn>`__ map is
+`morn_map.c <https://github.com/jingweizhanghuai/Morn/blob/master/src/util/morn_map.c>`__, and APIs are defined in
+`morn_util.h <https://github.com/jingweizhanghuai/Morn/blob/master/include/morn_util.h>`__.
 
 .. _header-n19:
 
@@ -67,7 +69,7 @@ When the key is a string, ``key_size`` can be set DFLT.
 bytes of ``value``, when value is a string, the ``value_size`` also can
 be set DFLT.
 
-The return is a pointer to node's value written in map's memory. It will return NULL when failure.
+The return is a pointer to node's value written in map's memory. It returns NULL if failure.
 
 .. note::
    The key must be unique. If key-value nodes have the same key, the last one will override the previous.
@@ -90,7 +92,7 @@ If the key type is a string, ``key_size`` can be set NULL.
 
 ``value_size`` is used to save the bytes of ``value``, if necessary.
 
-The return is a pointer to node's value in map's memory, it will return NULL when node is not been found.
+The return is a pointer to node's value in map's memory, it returns NULL when node is not been found.
 
 .. _header-n40:
 

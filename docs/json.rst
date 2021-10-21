@@ -48,10 +48,10 @@ This is a typical JSON string, we will take it as an example:
 .. _header-n5:
 
 API
----------
+---
 
 The source code of `Morn <https://github.com/jingweizhanghuai/Morn>`__ JSON is
-`morn_json.c <https://github.com/jingweizhanghuai/Morn/blob/master/test/test_JSON_file.c>`__, and APIs are defined in
+`morn_json.c <https://github.com/jingweizhanghuai/Morn/blob/master/src/util/morn_JSON.c>`__, and APIs are defined in
 `morn_util.h <https://github.com/jingweizhanghuai/Morn/blob/master/include/morn_util.h>`__.
 
 .. _header-n6:
@@ -146,7 +146,7 @@ Read JSON Node
 
 The input node must with type of list(``JSON_LIST`` or 
 ``JSON_KEY_LIST``) or array(``JSON_ARRAY`` or ``JSON_KEY_ARRAY``), It
-returns NULL when read failure.
+returns NULL if read failure.
 
 For example:
 

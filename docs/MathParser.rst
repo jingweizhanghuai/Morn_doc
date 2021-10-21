@@ -6,8 +6,6 @@ Math Parser
 `Morn <https://github.com/jingweizhanghuai/Morn>`__ Provides functions for math expression parsing, which is **small,
 simple and extensible**. And you can use it building your own calculator.
 
-.. _header-n5:
-
 API
 ---
 
@@ -27,9 +25,7 @@ Calculate from Expression
 The ``str`` is string of math expression. It returns the calculate result.
 
 Math expression here can be arithmetic operation whit ``+``, ``-``,
-``*`` ,\ ``/`` and other predefined functions.
-
-For details, see the example below.
+``*`` ,\ ``/`` and other functions(predefined or custom).
 
 .. _header-n80:
 
@@ -42,8 +38,9 @@ Register for Custom Functions
    void mCalculateFunction(char *name,void *func);
 
 Except for the predefined functions, custom functions is also supported.
-You must register your function by ``mCalculateFunction`` before use it
+And you must register your function by ``mCalculateFunction`` before use it
 by ``mCalculate``.
+
 You can give a new name for the function, if nessary.
 
 The new custom function for register must like this:
@@ -52,8 +49,8 @@ The new custom function for register must like this:
 
    double myfunc(double a,double b,...);
 
-Thus, 1.Parameter type of the function must be ``double``, 2.The function must has at
-least 1 parameter, and at most 8. 3.Return value is a must, and it must be ``double``.
+Thus, 1.Type of the function parameter must be ``double``, 2.The function must has at
+least 1 parameter, and at most 8. 3.Return value is a must, and must be ``double``.
 
 .. _header-n108:
 
@@ -95,8 +92,7 @@ Output is:
 Binding with Custom Functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this example, we defined our own function ``r2a`` and ``a2r``, which
-can converse values between angle and radian.
+In this example, we defined our own function ``r2a`` and ``a2r``, which converse values between angle and radian.
 
 .. code:: c
 
@@ -168,7 +164,7 @@ Regulation
 predefined functions
 ~~~~~~~~~~~~~~~~~~~~
 
-In API ``mCalculate``, the below functions are supporter:
+In API ``mCalculate``, the below functions are supported:
 
 -  abs(x): calculate absolute value, ``abs(-2)``\ is 2.
 -  min(x,y): select the minimum value of x and y, ``min(1,2)`` is 1.
@@ -214,11 +210,11 @@ exponential operations (^), then multiplication, division, and mod (*,
 
 So ``-3^2``, for example, would result of -9 (instead of 9).
 
-For continuous power expression, it will be calculated from right to
+For continuous power expression, it will calculate from right to
 left, such as ``2^3^2``, is actually same as ``2^(3^2)``, resulting 512.
 
-For other operations of same priority except for power, it will be
-calculated from left to right.
+For other operations of same priority except for power, it will 
+calculate from left to right.
 
 .. tip:: 
 

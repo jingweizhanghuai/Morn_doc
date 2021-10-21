@@ -3,7 +3,7 @@
 Math Parser
 ===========
 
-`Morn <https://github.com/jingweizhanghuai/Morn>` Provides functions for math expression parsing, which is **small,
+`Morn <https://github.com/jingweizhanghuai/Morn>`__ Provides functions for math expression parsing, which is **small,
 simple and extensible**. And you can use it building your own calculator.
 
 .. _header-n5:
@@ -247,7 +247,7 @@ Others
 Tool
 ----
 
-`Morn <https://github.com/jingweizhanghuai/Morn>` provides a command-line calculator, It is simple and easy:
+`Morn <https://github.com/jingweizhanghuai/Morn>`__ provides a command-line calculator, It is simple and easy:
 
 .. code:: 
 

@@ -8,8 +8,9 @@ Contents:
    :glob:
 
    sort
-   json
    Map
+   json
+   MathParser
 
 
 

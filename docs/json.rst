@@ -3,9 +3,9 @@
 JSON
 ====
 
-Morn provides a library for parsing JSON files. It is
+`Morn <https://github.com/jingweizhanghuai/Morn>`__ provides a library for parsing JSON files. It is
 **simple** (with only two interfaces) and **fast** (much faster than
-RapidJSON) .
+`rapidjson <https://github.com/Tencent/rapidjson>`__) .
 
 This is a typical JSON string, We will take it as an example:
 
@@ -45,9 +45,22 @@ This is a typical JSON string, We will take it as an example:
        }
    }
 
-JSON string is formed by nodes with according rules.
-JSON node is the basic structure in Morn, These nodes have different
-types as key-value or single-value. We define these types as:
+.. _header-n5:
+
+API
+---------
+
+The source code of `Morn <https://github.com/jingweizhanghuai/Morn>`__ JSON is
+`morn_json.c <https://github.com/jingweizhanghuai/Morn/blob/master/src/util/morn_json.c>`__, and APIs are defined in
+`morn_util.h <https://github.com/jingweizhanghuai/Morn/blob/master/include/morn_util.h>`__.
+
+.. _header-n6:
+
+JSON Node
+~~~~~~~~~
+
+JSON is organized with JSON nodes.In `Morn <https://github.com/jingweizhanghuai/Morn>`__ JSON node is the basic structure.
+These nodes have different types as key-value or single-value. We define these types as:
 
 .. code:: c
 
@@ -81,13 +94,8 @@ JSON Node is defined as:
            uint16_t num;        //child node number, valid when type isJSON_KEY_ARRAY、JSON_ARRAY、JSON_KEY_LIST or JSON_LIST
        };
        char *key;
-       char type;
+       int8_t type;
    };
-
-.. _header-n10:
-
-API
----------
 
 .. _header-n11:
 
@@ -99,10 +107,10 @@ Load and Parse JSON
    struct JSONNode *mJSONLoad(MFile *jsonfile);
    struct JSONNode *mJSONLoad(MString *jsondata);
 
-With the input is a JSON file or a JSON string, the output is the parsed
+The input can be a JSON file or a JSON string, the output is the parsed
 root node.
 
-This is a simple example：
+It can be used as:
 
 .. code:: c
 
@@ -111,7 +119,7 @@ This is a simple example：
    ...
    mFileRelease(file);
 
-or:
+or as:
 
 .. code:: c
 
@@ -137,8 +145,8 @@ Read JSON Node
    struct JSONNode *mJSONRead(struct JSONNode *node,const char *key,struct JSONNode *dst);
 
 The input node must with type of list(``JSON_LIST`` or 
-``JSON_KEY_LIST``\ ）or array(``JSON_ARRAY`` or ``JSON_KEY_ARRAY``)，It
-returns NULL on read failure.
+``JSON_KEY_LIST``) or array(``JSON_ARRAY`` or ``JSON_KEY_ARRAY``), It
+returns NULL when read failure.
 
 For example:
 
@@ -151,7 +159,7 @@ For example:
    child = mJSONRead(mother,"child5"); //mother is list, read the node with key is "child5"
    child = mJSONRead(mother,"a.b[3].c.d[6]");   //read further child node
 
-or you also can write it as:
+Or it can be writen as:
 
 .. code:: c
 
@@ -167,11 +175,10 @@ or you also can write it as:
 Example
 -------
 
-The full example file is
+Complete example file is
 `test_JSON_file.c <https://github.com/jingweizhanghuai/Morn/blob/master/test/test_JSON_file.c>`__
 
-Taking the JSON file at the beginning as an example, it can be read 
-as following:
+Taking the beginning JSON file as an example, it can be read as:
 
 .. code:: c
 
@@ -194,8 +201,7 @@ as following:
        mFileRelease(file);
    }
 
-in this example, two nodes have been read: root-node and hello-node. The
-output is:
+In this example, two nodes have been read: root-node and hello-node. Output is:
 
 .. code:: 
 
@@ -260,7 +266,7 @@ For further child node, it can be read layer by layer, for example:
    struct JSONNode *day=mJSONRead(node,"day");
    printf("date.day=%d,type=%s\n",day->dataS32,mJSONNodeType(day));
 
-Or it also can be read cross layers:
+Or it can be read cross layers:
 
 .. code:: c
 
@@ -271,7 +277,7 @@ Or it also can be read cross layers:
    struct JSONNode *day=mJSONRead(json,"date.day");
    printf("date.day=%d,type=%s\n",day->dataS32,mJSONNodeType(day));
 
-Output of these above two programs is:
+Outputs of these above two programs are the same:
 
 .. code:: 
 
@@ -282,7 +288,7 @@ Output of these above two programs is:
 .. tip:: 
    If you want to traverse all the child nodes, Read layer-by-layer is faster than reading cross layers.
 
-Several flexible forms for reading from arrays are provided:
+Several flexible forms for reading from arrays are provided as:
 
 .. code:: c
 
@@ -336,7 +342,7 @@ Output is:
    10,11,12,13,
    20,21,22,23,
 
-Node can be read from mixed list and array as:
+Node can be read from mixed list and array, as:
 
 .. code:: c
 
@@ -363,8 +369,15 @@ Performance
 Complete test file is
 `test_JSON_file2.cpp <https://github.com/jingweizhanghuai/Morn/blob/master/test/test_JSON_file2.cpp>`__
 
-Here, Morn is compared with:
-`cjson <https://github.com/DaveGamble/cJSON>`__\ 、\ `jsoncpp <https://github.com/open-source-parsers/jsoncpp>`__\ 、\ `nlohmann <https://github.com/nlohmann/json>`__\ 、\ `rapidjson <https://github.com/Tencent/rapidjson>`__\ 、\ `yyjson <https://github.com/ibireme/yyjson>`__
+Here, `Morn <https://github.com/jingweizhanghuai/Morn>`__ is compared with:
+`cjson <https://github.com/DaveGamble/cJSON>`__, `jsoncpp <https://github.com/open-source-parsers/jsoncpp>`__, 
+`nlohmann <https://github.com/nlohmann/json>`__, `rapidjson <https://github.com/Tencent/rapidjson>`__, and `yyjson <https://github.com/ibireme/yyjson>`__
+
+Following command is used to compile this program:
+
+.. code:: shell
+
+   g++ -O2 test_JSON_file2.cpp -o test_JSON_file2.exe -lcjson -ljsoncpp -lyyjson -lmorn
 
 .. _header-n72:
 
@@ -373,8 +386,8 @@ Test 1
 
 Parsing
 `citm_catalog.json <https://github.com/miloyip/nativejson-benchmark/blob/master/data/citm_catalog.json>`__,
-and reading "areaId" in file, then measure time-consume of parsing and reading. This
-is a part of the program (using Morn)：
+and reading "areaId" in the file, then measure time-consume of parsing and reading. This
+is a fragment of the program using `Morn <https://github.com/jingweizhanghuai/Morn>`__:
 
 .. code:: c
 
@@ -429,7 +442,7 @@ Test 2
 parsing
 `canada.json <https://github.com/miloyip/nativejson-benchmark/blob/master/data/canada.json>`__
 and reading all of coordinates, then measure time-consume of parsing and
-reading. This is a part of the program (using Morn)：
+reading. This is a fragment of the program using `Morn <https://github.com/jingweizhanghuai/Morn>`__:
 
 .. code:: c
 
@@ -470,18 +483,17 @@ Result is:
 
 |image2|
 
-Thus it can be seen: 1. rapidjson/yyjson/Morn is much faster than other
-json library (cjson is OK in Test 1,but is slowest in test 2), 2. 
-yyjson and Morn is faster than rapidjson.
+It can be seen: 1. `rapidjson <https://github.com/Tencent/rapidjson>`__ `yyjson <https://github.com/ibireme/yyjson>`__ and `Morn <https://github.com/jingweizhanghuai/Morn>`__ is much faster than other
+json library (`cjson <https://github.com/DaveGamble/cJSON>`__ is OK in Test 1,but is slowest in test 2), 2. 
+`yyjson <https://github.com/ibireme/yyjson>`__ and `Morn <https://github.com/jingweizhanghuai/Morn>`__ is faster than `rapidjson <https://github.com/Tencent/rapidjson>`__.
 
 .. _header-n85:
 
 Test 3
 ~~~~~~
 
-Comparing the performance of rapidjson, yyjson and Morn with many
-different json file. rapidjson and yyjson are known for high performance
-JSON parse.
+Comparing the performance of `rapidjson <https://github.com/Tencent/rapidjson>`__, `yyjson <https://github.com/ibireme/yyjson>`__ and `Morn <https://github.com/jingweizhanghuai/Morn>`__ by parsering many
+different json files. `rapidjson <https://github.com/Tencent/rapidjson>`__ and `yyjson <https://github.com/ibireme/yyjson>`__ are both known for their high performance.
 
 The testing file are: canada.json, 
 citm_catalog.json `twitter.json <https://github.com/chadaustin/sajson/blob/master/testdata/twitter.json>`__, 
@@ -492,8 +504,8 @@ citm_catalog.json `twitter.json <https://github.com/chadaustin/sajson/blob/maste
 and
 `update-center.json <https://github.com/chadaustin/sajson/blob/master/testdata/update-center.json>`__
 
-In the program we parse each of these files for 100 times and measure
-the time consume.
+In this program we parse each of these files for 100 times and measure
+the time-consume.
 
 Testing program is:
 
@@ -598,8 +610,8 @@ Result is:
 
 |image3|
 
-Thus it can be seen: Morn and yyjson are much faster then rapidjson with
-2 to 5 times, in most cases Morn is faster then yyjson.
+It can be seen that: 1.`Morn <https://github.com/jingweizhanghuai/Morn>`__ and `yyjson <https://github.com/ibireme/yyjson>`__ are much faster then `rapidjson <https://github.com/Tencent/rapidjson>`__ with
+2 to 5 times, 2.In most cases `Morn <https://github.com/jingweizhanghuai/Morn>`__ is faster then `yyjson <https://github.com/ibireme/yyjson>`__.
 
 .. |image1| image:: https://z3.ax1x.com/2021/10/13/5KQ2Is.png
    :target: https://imgtu.com/i/5KQ2Is

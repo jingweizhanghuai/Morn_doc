@@ -6,21 +6,20 @@ Map
 Map is organized by lots of key-value nodes. You can find the value by
 the key.
 
-Morn Provides some function to operate the key-value nodes in the map,
-such as increase, write, read and delete.
+`Morn <https://github.com/jingweizhanghuai/Morn>` provides some functions to operate the key-value nodes in the map,
+such as write, read and node-delete.
 
-Key and value can be of any type (which can be integer float string
-array pointer or stuct).
+Key and value can be any types (integer, float, string, array, pointer or stuct).
 
-The Morn map has the following characteristics:
+The `Morn <https://github.com/jingweizhanghuai/Morn>` map has following characteristics:
 
--  can be used for any types
+-  mixed types supported
 
 -  high-performance
 
 -  simple API
 
--   lightweight algorithm(with about 250 lines codes)
+-  lightweight algorithm(with about 250 lines codes)
 
 The source code is `morn_map.c <../src/util/morn_map.c>`__
 
@@ -38,7 +37,7 @@ Create Map
 
    MMap *mMapCreate();
 
-``mMapCreate`` is a must with before using Morn map.
+``mMapCreate`` is a must before using `Morn <https://github.com/jingweizhanghuai/Morn>` map.
 
 .. _header-n23:
 
@@ -49,7 +48,7 @@ Release Map
 
    void mMapRelease(MMap *map);
 
-``mMapRelease`` is a must after using Morn map.
+``mMapRelease`` is a must after using `Morn <https://github.com/jingweizhanghuai/Morn>` map.
 
 .. _header-n27:
 
@@ -62,16 +61,16 @@ Write to Map
    void *mMapWrite(MMap *map,const void *key,int key_size,const void *value,int value_size);
 
 ``key`` is a pointer to any types. ``key_size`` is the bytes of ``key``.
-when the key type is a string, ``key_size`` can be set DFLT.
+When the key is a string, ``key_size`` can be set DFLT.
 
-``value`` is the corresponding value of ``key``, value\ *size is the
-bytes of ``value``, when value is a string, the \`value*\ size\` can
-also be set DFLT.
+``value`` is the value of ``key`` node, ``value_size`` is the
+bytes of ``value``, when value is a string, the ``value_size`` also can
+be set DFLT.
 
-The return is a pointer to value of map node written in the memory.
+The return is a pointer to node's value written in map's memory. It will return NULL when failure.
 
 .. note::
-   for key-value node, the key must be unique. If two key-value nodes have the same key, the last one will override the previous one.
+   The key must be unique. If key-value nodes have the same key, the last one will override the previous.
 
 .. _header-n34:
 
@@ -84,16 +83,14 @@ Read from Map
    void *mMapRead(MMap *map,const char *key,char *value);
    void *mMapRead(MMap *map,const void *key,int key_size,void *value,int *value_size);
 
-when the key type is a string, ``key_size`` can be set as NULL.
+If the key type is a string, ``key_size`` can be set NULL.
 
-``value`` is a memory pointer to save the data, when the data be read,
-it will be copied to this memory address. if copy is not necessary,
+``value`` is a pointer to memory for saving data.if data-copy is not necessary,
 ``value`` can be set NULL.
 
-``value_size`` is used to save the bytes of ``value``, if it is
-necessary.
+``value_size`` is used to save the bytes of ``value``, if necessary.
 
-The return is a pointer to value of map node in map memory.
+The return is a pointer to node's value in map's memory, it will return NULL when node is not been found.
 
 .. _header-n40:
 
@@ -107,21 +104,20 @@ Delete Map Node
 
 You can delete a key-value node from the ``map`` using ``mMapDelete``.
 
-``key_size`` can be set DFLT when the ``key`` is a string.
+``key_size`` can be set DFLT when ``key`` is a string.
 
 .. _header-n44:
 
-Map Node Traversaling
+Node Traversaling
 ~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: c
 
    void mMapNodeOperate(MChain *map,void (*func)(const void *,const int,void *,int,void *),void *para);
 
-You can do some operation for every map node using ``mMapNodeOperate``.
+You can do operations for every map node using ``mMapNodeOperate``.
 
-``func`` is a pointer to operate function, the form of this function
-must be:
+``func`` is a pointer to operate function, the form of this function must be:
 
 .. code:: c
 
@@ -130,7 +126,7 @@ must be:
 ``para`` is the parameter of ``func``.
 
 .. note::
-   map node is ordered by key. So when operate the key-value node, the key must not be changed.
+   Map node is ordered by key. So when operate the key-value node, the key must not be changed.
 
 .. _header-n51:
 
@@ -266,9 +262,9 @@ return is NULL.
 Example 3
 ~~~~~~~~~
 
-This example shows that: in Morn map we can use any type of keys and
-values, such as integer float pointer array string and struct etc. And
-we can mix use any type in map.
+This example shows that: in `Morn <https://github.com/jingweizhanghuai/Morn>` map we can use any type of keys and
+values, such as integer, float, pointer, array, string, and struct etc. And
+we can mix use these different types in a same map.
 
 .. code:: c
 
@@ -323,7 +319,7 @@ Output is:
    a idx=1
 
 Note: **mixing types of key is not recommended in practice**. In the
-following example, an error will occur:
+following example, an error may occur:
 
 .. code:: c
 
@@ -361,17 +357,16 @@ Output is:
    c idx=4
    d idx=4
 
-Although a/b/c/d has different types, they are the same in memory, which
-is 0x64636261 used 4 bytes. So all four ``mMapWrite`` are exactly use
-the same parameters, and it will be overwrite one by one.
+Although ``a``, ``b``, ``c`` and ``d`` has different types, they are the same in the memory(0x64636261 with 4 bytes). 
+So all these four ``mMapWrite`` are exactly same, and nodes will overwrite one by one.
 
 .. _header-n79:
 
 Performance
 -----------
 
-Here we main compared Morn map using C and STL map/unordered\ *map using
-C++. usually the std::map is a red-black tree, and std::unordered*\ map
+Here we main compared `Morn <https://github.com/jingweizhanghuai/Morn>` map using C and STL map/unordered_map using
+C++. Usually the `std::map` is a red-black tree, and std::unordered_map
 is a hash-table.
 
 Tests include writing, reading, and deleting.
@@ -379,9 +374,9 @@ Tests include writing, reading, and deleting.
 Complete test file is
 `test_map2.cpp <https://github.com/jingweizhanghuai/Morn/blob/master/test/test_map2.cpp>`__.
 
-We use the following command to compile the program:
+Following command is used to compile this program:
 
-.. code:: 
+.. code:: shell
 
    g++ -O2 -DNDEBUG test_map2.cpp -lmorn -o test_map2.exe
 
@@ -410,7 +405,7 @@ strings for the test:
 Test 1
 ~~~~~~
 
-Test with the key is string, and the value is integer:
+Testing with key is string, and value is integer:
 
 .. code:: c
 
@@ -448,7 +443,7 @@ key-value nodes with 100 times. The Output is:
 
 |image1|
 
-Thus: **when key is string Morn is faster then std::map and
+Thus: **when key is string `Morn <https://github.com/jingweizhanghuai/Morn>` is faster then std::map and
 std::unorderd_map**\ 。
 
 .. _header-n89:
@@ -456,7 +451,7 @@ std::unorderd_map**\ 。
 Test 2
 ~~~~~~
 
-Test with the key is integer, and the value is string:
+Testing with key is integer, and value is string:
 
 .. code:: c
 
@@ -494,7 +489,7 @@ key-value nodes with 100 times. The Output is:
 
 |image2|
 
-Thus: **when key is integer, Morn is faster than std::map and
+Thus: **when key is integer, `Morn <https://github.com/jingweizhanghuai/Morn>` is faster than std::map and
 std::unorderd_map**.
 
 .. _header-n95:
@@ -502,7 +497,7 @@ std::unorderd_map**.
 Test 3
 ~~~~~~
 
-Test with the key is ordered integer, and the value is string:
+Testing with key is ordered integer, and value is string:
 
 .. code:: c
 
@@ -540,7 +535,7 @@ key-value nodes with 100 times. The Output is:
 
 |image3|
 
-Thus: **when key is integer, Morn is faster than std::map and
+Thus: **when key is integer, `Morn <https://github.com/jingweizhanghuai/Morn>` is faster than std::map and
 std::unorderd_map**.
 
 .. _header-n101:
@@ -548,7 +543,7 @@ std::unorderd_map**.
 Test 4
 ~~~~~~
 
-Test for large amount of data with key is string and value is integer:
+Testing for large amount of data with key is string and value is integer:
 
 .. code:: c
 
@@ -593,7 +588,7 @@ We test 100000 key-value nodes and 1000000 key-value nodes, Output is:
 |image4|
 
 It can be seen that: **for large amount of data, when key is string,
-Morn is faster than std::map. But if there is millions of nodes, Morn
+`Morn <https://github.com/jingweizhanghuai/Morn>` is faster than std::map. But if there is millions of nodes, `Morn <https://github.com/jingweizhanghuai/Morn>`
 will fall behind of std::unorderd_map**.
 
 .. _header-n107:
@@ -601,7 +596,7 @@ will fall behind of std::unorderd_map**.
 Test 5
 ~~~~~~
 
-Test for large amount of data with key is integer and value is string:
+Testing for large amount of data with key is integer and value is string:
 
 .. code:: c
 
@@ -646,11 +641,11 @@ We test 100000 key-value nodes and 1000000 key-value nodes, Output is:
 |image5|
 
 It can be seen that: **for large amount of data, when key is integer,
-std::unorderd_map is faster than Morn map. And if there is millions of
-nodes, Morn will fall behind of std::map**.
+std::unorderd_map is faster than `Morn <https://github.com/jingweizhanghuai/Morn>` map. And if there is millions of
+nodes, `Morn <https://github.com/jingweizhanghuai/Morn>` will fall behind of std::map**.
 
-The above tests show that: 1. Morn has extreme performance when the data
-amount is not too large(<100000). 2. Morn has high performance when the
+The above tests show that: 1. `Morn <https://github.com/jingweizhanghuai/Morn>` has extreme performance when the data
+amount is not too large(<100000). 2. `Morn <https://github.com/jingweizhanghuai/Morn>` has high performance when the
 key type is string, struct, array and other complex types.
 
 .. |image1| image:: https://z3.ax1x.com/2021/04/12/c0HZGD.png

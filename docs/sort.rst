@@ -10,15 +10,15 @@ Sort with Morn is fast and simple, Generic is supported to some extent.
 API
 ---
 
-The source code of Morn sort is
-`morn_sort.c <../src/math/morn_sort.c>`__, and the API is defined in
-`morn_math.h <../include/morn_math.h>`__.
+The source code of `Morn <https://github.com/jingweizhanghuai/Morn>`__ sort is
+`morn_sort.c <https://github.com/jingweizhanghuai/Morn/blob/master/src/math/morn_sort.c>`__, and APIs are defined in
+`morn_math.h <https://github.com/jingweizhanghuai/Morn/blob/master/include/morn_math.h>`__.
 
-Tips:
+.. tip:: 
 
-"Generic" is supported，``Type`` can be ``int8_t``, ``uint8_t``,
-``int16_t``, ``uint16_t``, ``int32_t``, ``uint32_t``, ``int64_t``,
-``uint64_t``, ``float`` or ``double``.
+   "Generic" is supported，``Type`` can be ``int8_t``, ``uint8_t``,
+   ``int16_t``, ``uint16_t``, ``int32_t``, ``uint32_t``, ``int64_t``,
+   ``uint64_t``, ``float`` or ``double``.
 
 .. _header-n7:
 
@@ -32,8 +32,8 @@ Ascending Sort
    void mAscSort(Type *data_in,Type *data_out,int *index_out,int num);
    void mAscSort(Type *data_in,int *index_in,Type *data_out,int *index_out,int num);
 
-``data_in`` is the input data before sort, and ``data_out`` is the
-output after sort.
+``data_in`` is the input data before sort, and ``data_out`` is the sorted
+outpu.
 
 when ``data_out`` is equal as ``data_in`` (or ``data_out`` is not set,
 or ``data_out`` ==NULL), the output data will overwrite the input.
@@ -51,7 +51,7 @@ index will overwrite the input.
 
 ``num`` is the number of input.
 
-for example:
+For example:
 
 .. code:: c
 
@@ -81,7 +81,7 @@ Descending Sort
    void mDescSort(Type *data_in,Type *data_out,int *index_out,int num);
    void mDescSort(Type *data_in,int *index_in,Type *data_out,int *index_out,int num);
 
-It is same with ``mAscSort``.
+It is same as ``mAscSort``.
 
 for example:
 
@@ -113,16 +113,16 @@ Minimum Subset
    Type mMinSubset(Type,Type *data_in,int num_in,Type *data_out,int *index_out,int num_out);
    Type mMinSubset(Type,Type *data_in,int *index_in,int num_in, Type *data_out,int *index_out,int num_out);
 
-This is used to selected ``num_out`` smallest from all ``num_in`` data.
+This is used to select ``num_out`` smallest from all ``num_in`` data.
 
-.. note::
+.. note:: 
 
    The data selected is not sorted in order.
 
 ``data_in``, ``data_out``, ``index_in``, ``index_out`` is same with
 ``mAscSort`` and ``mDescSort``
 
-The return value is the threshold, which is the largest one in all output data.
+The return is threshold value, which is the largest one in all output.
 
 For example:
 
@@ -156,9 +156,9 @@ Maximum Subset
    Type mMaxSubset(Type,Type *data_in,int num_in,Type *data_out,int *index_out,int num_out);
    Type mMaxSubset(Type,Type *data_in,int *index_in,int num_in, Type *data_out,int *index_out,int num_out);
 
-it is same with ``mMinSubset``.
+It is same with ``mMinSubset``.
 
-The return value is the threshold, which is the smallest one in all output data.
+The return is threshold value, which is the smallest one in all output.
 
 For example:
 
@@ -195,7 +195,7 @@ Performance
 -----------
 
 Complete testing code is: `test_sort2.cpp <https://github.com/jingweizhanghuai/Morn/blob/master/test/test_sort2.cpp>`__.
-Compile command is:
+Compile command for these testings is:
 
 .. code:: shell
 
@@ -255,17 +255,17 @@ Testing Code is:
        mFree(data1); mFree(data2); mFree(data3); mFree(data4);
    }
 
-In above program, we firstly generate some random double data, and then
-measure time-consuming of: 1. sorting 1000 data for 10000times, 2.
+In above program, we firstly generate some random double precision floats, and then
+measure time-consume of: 1. sorting 1000 data for 10000times, 2.
 sorting 10000 data for 1000times, 3.sorting 100000 data for 100 times,
 4.sorting 1000000 data for 10 times and 5.sorting all 10000000 data for
 1 time. Output is:
 
 |image1|
 
-It can be seen that: 1. ``std::sort`` **and** ``mAscSort`` **in Morn is the
+It can be seen that: 1. ``std::sort`` **and** ``mAscSort`` ** is the
 fastest**, 2.for small amount of data, ``gsl_sort`` is faster then
-``qsort``, but for the large amount of data ``qsort`` is faster.
+``qsort``, but for the large amount ``qsort`` is faster.
 
 .. _header-n65:
 
@@ -304,9 +304,9 @@ Testing code is:
        mFree(data1); mFree(data2);mFree(index1);mFree(index2);
    }
 
-In above program, we firstly generate some random double data, and then
-measure time-consuming of: 1. sorting 1000 data for 10000times, 2.
-sorting 10000 data for 1000times, 3.sorting 100000 data for 100 times,
+In above program, we firstly generate some random double precision floats, and then
+measure time-consume of: 1. sorting 1000 data for 10000 times, 2.
+sorting 10000 data for 1000 times, 3.sorting 100000 data for 100 times,
 4.sorting 1000000 data for 10 times and 5.sorting all 10000000 data for
 1 time. Output is:
 
@@ -355,11 +355,11 @@ C++ STL. Test code is:
        mFree(data1);mFree(data2);
    }
 
-In above program, we generate some double data, and then test:
+In above program, we generate some double precision floats, and then test:
 1.selecting 10000, 30000, 50000, 70000, 90000 data from 100000 for 100
 times, 2.selecting 100000, 300000, 500000, 700000, 900000 data from 1000000
 for 10 times, 3.selecting 1000000, 3000000, 5000000, 7000000, 9000000 data
-from 10000000 for 1 times. The testing code is:
+from 10000000 for 1 time. The testing code is:
 
 |image3|
 
@@ -401,7 +401,7 @@ Output is:
 
 |image4|
 
-It shows that: gap of time-consuming between Morn and `GSL <https://www.gnu.org/software/gsl/>`__ is huge.
+It shows that: gap of time-consume between Morn and `GSL <https://www.gnu.org/software/gsl/>`__ is huge.
 
 .. note::
 

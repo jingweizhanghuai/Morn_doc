@@ -3,14 +3,17 @@
 Math Parser
 ===========
 
-Morn Provides functions for math expression parsing, which is **small,
-simple and extensible**. And you can use it to build your own
-calculator.
+`Morn <https://github.com/jingweizhanghuai/Morn>` Provides functions for math expression parsing, which is **small,
+simple and extensible**. And you can use it building your own calculator.
 
 .. _header-n5:
 
 API
 ---
+
+The source code of `Morn <https://github.com/jingweizhanghuai/Morn>`__ math parser is
+`morn_calculate.c <https://github.com/jingweizhanghuai/Morn/blob/master/src/math/morn_calculate.c>`__, and APIs are defined in
+`morn_math.h <https://github.com/jingweizhanghuai/Morn/blob/master/include/morn_math.h>`__.
 
 .. _header-n6:
 
@@ -21,13 +24,12 @@ Calculate from Expression
 
    double mCalculate(char *str);
 
-The ``str`` is string of math expression. The return is the result of
-calculate.
+The ``str`` is string of math expression. It returns the calculate result.
 
-math expression here can be arithmetic operation whit ``+``, ``-``,
-``*`` ,\ ``/``, and other predefined functions.
+Math expression here can be arithmetic operation whit ``+``, ``-``,
+``*`` ,\ ``/`` and other predefined functions.
 
-See the example below.
+For details, see the example below.
 
 .. _header-n80:
 
@@ -37,27 +39,31 @@ Register for Custom Functions
 .. code:: c
 
    void mCalculateFunction(void *func);
+   void mCalculateFunction(char *name,void *func);
 
 Except for the predefined functions, custom functions is also supported.
 You must register your function by ``mCalculateFunction`` before use it
 by ``mCalculate``.
+You can give a new name for the function, if nessary.
 
-The new custom function for register must have form like this:
+The new custom function for register must like this:
 
 .. code:: c
 
    double myfunc(double a,double b,...);
 
-Thus, 1. the parameter of the function must ``double``, 2.It must has at
-least 1 parameter, and at most 8. 3. Return value is a must, and it must
-be ``double``.
+Thus, 1.Parameter type of the function must be ``double``, 2.The function must has at
+least 1 parameter, and at most 8. 3.Return value is a must, and it must be ``double``.
 
 .. _header-n108:
 
 Example
 -------
 
-.. _header-n78:
+Complete example file is
+`test_calculate.c <https://github.com/jingweizhanghuai/Morn/blob/master/test/test_calculate.c>`__
+
+.. _header-n110:
 
 Getting Start
 ~~~~~~~~~~~~~
@@ -90,7 +96,7 @@ Binding with Custom Functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In this example, we defined our own function ``r2a`` and ``a2r``, which
-can converse between angle and radian.
+can converse values between angle and radian.
 
 .. code:: c
 
@@ -109,7 +115,7 @@ We must register the two functions by ``mCaculateFunction`` firstly.
 .. code:: c
 
    int main()
-   {   
+   {
        mCaculateFunction(a2r);
        printf("sin(a2r(30)) = %f\n",mCaculate("sin(a2r(30))"));
        
@@ -126,24 +132,20 @@ Output is:
    sin(a2r(30)) = 0.500000
    r2a(atan(1)) = 45.000000
 
-Another example: we defined a function to find the mid-value of 3 data.
+Another example: we defined a function to find the mid-value from 3 data.
 
 .. code:: c
 
-   double mid(double a,double b,double c)
+   double get_mid_value(double a,double b,double c)
    {
        if((a>b)==(c>=a)) return a;
        if((a>b)==(b>=c)) return b;
        return c;
    }
-
-And then we use it as this:
-
-.. code:: c
-
+   
    int main()
    {
-       mCaculateFunction(mid);
+       mCaculateFunction("mid",get_mid_value);
        char *str = "mid(5,1,2)";
        printf("%s = %f\n",str,mCaculate(str));
 
@@ -190,7 +192,7 @@ In API ``mCalculate``, the below functions are supporter:
 -  atan(x): anti-tangent, ``atan(0)`` is0.
 -  acot(x): anti-cotangent, ``acot(1)`` is 0.7853981633974483.
 
-..note::
+.. note:: 
 
    The input of sin(x), cos(x), tan(x) and cos(x) is radian (not angle).
 
@@ -218,9 +220,9 @@ left, such as ``2^3^2``, is actually same as ``2^(3^2)``, resulting 512.
 For other operations of same priority except for power, it will be
 calculated from left to right.
 
-..tip::
+.. tip:: 
 
-   precedence is complex, but parentheses is simple.
+   precedence is complex, parentheses is simple.
 
 .. _header-n266:
 
@@ -231,10 +233,10 @@ Others
    percent-sign). So ``5%+2`` means 5 mod +2, the result is 1(instead of
    2.05).
 
--   Spaces play no role in expression, so you can write '10,000' or
-   '10000', but not '10,000'.
+-   Spaces key play no role in expression, so you can write '10000' or
+   '10 000', but not '10,000'.
 
--  ``pi`` is 3.1415926, and ``e`` is 2.718281828, these 2 constants are
+-  ``pi`` (3.1415926) and ``e`` (2.718281828) are 2 constants, and they are
    case-insensitive.
 
 -  The multiplication sign ``*`` cannot be omitted, ``2pi`` is invalid,
@@ -245,7 +247,7 @@ Others
 Tool
 ----
 
-Morn provides a calculator with command line, It is simple, such as:
+`Morn <https://github.com/jingweizhanghuai/Morn>` provides a command-line calculator, It is simple and easy:
 
 .. code:: 
 

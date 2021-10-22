@@ -51,26 +51,6 @@ index will overwrite the input.
 
 ``num`` is the number of input.
 
-For example:
-
-.. code:: c
-
-   int data[10];
-   printf("in :");
-   for(int i=0;i<10;i++) {data[i] = mRand(-100,100);printf("%d,",data[i]);}
-   mAscSort(data,NULL,index,10);
-   printf("\nout :");
-   for(int i=0;i<10;i++) {printf("%d(%d),",data[i],index[i]);}
-
-Output is:
-
-.. code:: 
-
-   in :5,45,-19,-73,61,-9,95,42,-73,-64,
-   out :-73(8),-73(3),-64(9),-19(2),-9(5),5(0),42(7),45(1),61(4),95(6),
-
-.. _header-n21:
-
 Descending Sort
 ~~~~~~~~~~~~~~~
 
@@ -82,26 +62,6 @@ Descending Sort
    void mDescSort(Type *data_in,int *index_in,Type *data_out,int *index_out,int num);
 
 It is same as ``mAscSort``.
-
-for example:
-
-.. code:: c
-
-   int data[10];
-   printf("in :");
-   for(int i=0;i<10;i++) {data[i] = mRand(-100,100);printf("%d,",data[i]);}
-   mDescSort(data,10);
-   printf( "\nout :");
-   for(int i=0;i<10;i++) {printf("%d,",data[i]);}
-
-Output is:
-
-.. code:: 
-
-   in :91,-96,2,53,-8,82,-79,16,18,-5,
-   out :91,82,53,18,16,2,-5,-8,-79,-96,
-
-.. _header-n29:
 
 Minimum Subset
 ~~~~~~~~~~~~~~
@@ -124,28 +84,6 @@ This is used to select ``num_out`` smallest from all ``num_in`` data.
 
 The return is threshold value, which is the largest one in all output.
 
-For example:
-
-.. code:: c
-
-   int data[10];
-   printf("in :");
-   for(int i=0;i<10;i++) {data[i] = mRand(-100,100);printf("%d,",data[i]);}
-   int threshold = mMinSubset(data,10,NULL,index,4);
-   printf( "\nout :");
-   for(int i=0;i<4;i++) {printf("%d(%d),",data[i],index[i]);}
-   printf("threshold=%d\n",threshold);    
-
-Output is:
-
-.. code:: 
-
-   in :47,-56,-38,57,-63,-41,23,41,29,78,
-   out :-41(5),-56(1),-38(2),-63(4),
-   threshold=-38
-
-.. _header-n42:
-
 Maximum Subset 
 ~~~~~~~~~~~~~~
 
@@ -160,28 +98,6 @@ It is same with ``mMinSubset``.
 
 The return is threshold value, which is the smallest one in all output.
 
-For example:
-
-.. code:: c
-
-   int data[10];
-   printf("\nin :");
-   for(int i=0;i<10;i++) {data[i] = mRand(-100,100);printf("%d,",data[i]);}
-   int threshold=mMaxSubset(data,10,4);
-   printf( "\nout :");
-   for(int i=0;i<4;i++) {printf("%d,",data[i]);}
-   printf("threshold=%d\n",threshold); 
-
-Output is:
-
-.. code:: 
-
-   in :16,-65,90,-58,-12,6,-60,42,-36,-52,
-   out :16,42,90,6,
-   threshold=6
-
-.. _header-n51:
-
 Sort List Element
 ~~~~~~~~~~~~~~~~~
 
@@ -189,7 +105,120 @@ All above APIs is for types of number, and Morn provides ``mListSort``
 for ``MList``, which is a data containers for all types. See
 `MList <Morn:MList2>`__ for details.
 
-.. _header-n54:
+Example
+-------
+
+Here is some simple example. The complete code is `test_sort.c <https://github.com/jingweizhanghuai/Morn/blob/master/test/test_sort.c>`__.
+
+Data Sort
+~~~~~~~~~
+
+.. code:: c
+
+   #define N 16
+   
+   printf("\n\nin :");for(int i=0;i<N;i++) {data[i] = mRand(-1000,1000);printf("%d,",data[i]);}
+   mAscSort(data,N);
+   printf( "\nout :");for(int i=0;i<N;i++) {printf("%d,",data[i]);}
+   
+   printf("\n\nin :");for(int i=0;i<N;i++) {data[i] = mRand(-1000,1000);printf("%d,",data[i]);}
+   mDescSort(data,N);
+   printf( "\nout :");for(int i=0;i<N;i++) {printf("%d,",data[i]);}
+
+Output is:
+
+.. code:: 
+
+   in :617,652,-370,597,-310,674,-335,-353,407,-630,-481,964,-454,-654,-146,-942,
+   out :-942,-654,-630,-481,-454,-370,-353,-335,-310,-146,407,597,617,652,674,964,
+   
+   in :-878,-441,-239,-970,-803,-267,-718,749,-662,980,-955,922,-577,-991,-789,348,
+   out :980,922,749,348,-239,-267,-441,-577,-662,-718,-789,-803,-878,-955,-970,-991,
+
+Sort with Index
+~~~~~~~~~~~~~~~
+
+.. code:: c
+
+   #define N 16
+   
+   printf("\n\nin :");for(int i=0;i<N;i++) {data[i] = mRand(-1000,1000);printf("%d,",data[i]);}
+   mAscSort(data,NULL,index,N);
+   printf(" \nout :");for(int i=0;i<N;i++) {printf("%d(%d),",data[i],index[i]);}
+   
+   printf("\n\nin :");for(int i=0;i<N;i++) {data[i] = mRand(-1000,1000);printf("%d,",data[i]);}
+   mDescSort(data,NULL,index,N);
+   printf( "\nout :");for(int i=0;i<N;i++) {printf("%d(%d),",data[i],index[i]);}
+
+Output is:
+
+.. code:: 
+
+   in :928,730,543,999,-955,343,718,351,-369,444,-37,172,-130,-154,-905,582,
+   out :-955(4),-905(14),-369(8),-154(13),-130(12),-37(10),172(11),343(5),351(7),444(9),543(2),582(15),718(6),730(1),928(0),999(3),
+   
+   in :63,416,461,-475,835,873,804,320,522,-898,630,-316,766,641,-591,104,
+   out :873(5),835(4),804(6),766(12),641(13),630(10),522(8),461(2),416(1),320(7),104(15),63(0),-316(11),-475(3),-591(14),-898(9),
+
+Minimum/Maximum Subset
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: c
+
+   #define N 16
+   #define M 4
+   
+   printf("\n\nin :");for(int i=0;i<N;i++) {data[i] = mRand(-1000,1000);printf("%d,",data[i]);}
+   threshold=mMinSubset(data,N,M);
+   printf( "\nout :");for(int i=0;i<M;i++) {printf("%d,",data[i]);}
+   printf("\nthreshold=%d\n",threshold);
+   
+   printf("\n\nin :");for(int i=0;i<N;i++) {data[i] = mRand(-1000,1000);printf("%d,",data[i]);}
+   threshold=mMaxSubset(data,N,M);
+   printf( "\nout :");for(int i=0;i<M;i++) {printf("%d,",data[i]);}
+   printf("\nthreshold=%d\n",threshold);
+
+Output is:
+
+.. code:: 
+
+   in :89,163,-627,-103,-8,848,-419,11,79,761,183,589,542,-318,-364,0,
+   out :-419,-364,-627,-318,
+   threshold=-318
+
+   in :521,890,155,-136,580,-535,-196,-704,766,-269,-388,116,335,651,-238,-922,
+   out :580,890,651,766,
+   threshold=580
+
+Minimum/Maximum Subset with Index
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: c
+
+   #define N 16
+   #define M 4
+   
+   printf("\n\nin :");for(int i=0;i<N;i++) {data[i] = mRand(-1000,1000);printf("%d,",data[i]);}
+   threshold=mMinSubset(data,N,NULL,index,M);
+   printf( "\nout :");for(int i=0;i<M;i++) {printf("%d(%d),",data[i],index[i]);}
+   printf("\nthreshold=%d\n",threshold);
+   
+   printf("\n\nin :");for(int i=0;i<N;i++) {data[i] = mRand(-1000,1000);printf("%d,",data[i]);}
+   threshold=mMaxSubset(data,N,NULL,index,M);
+   printf( "\nout :");for(int i=0;i<M;i++) {printf("%d(%d),",data[i],index[i]);}
+   printf("\nthreshold=%d\n",threshold);
+
+Output is:
+
+.. code:: 
+
+   in :-126,189,-359,-455,-786,118,695,868,907,673,-63,379,-275,849,-868,296,
+   out :-786(4),-868(14),-455(3),-359(2),
+   threshold=-359
+   
+   in :-640,-920,411,-341,573,630,-462,-780,73,860,-109,-36,-782,638,880,-499,
+   out :880(14),638(13),860(9),630(5),
+   threshold=-630
 
 Performance
 -----------
@@ -200,8 +229,6 @@ Compile command for these testings is:
 .. code:: shell
 
    g++ -Ofast -DNDEBUG test_sort2.cpp -o test_sort2.exe -lgsl -lgslcblas -lmorn
-
-.. _header-n58:
 
 Data Sort
 ~~~~~~~~~
@@ -263,11 +290,9 @@ sorting 10000 data for 1000times, 3.sorting 100000 data for 100 times,
 
 |image1|
 
-It can be seen that: 1. ``std::sort`` **and** ``mAscSort`` ** is the
+It can be seen that: 1. ``std::sort`` **and** ``mAscSort`` **is the
 fastest**, 2.for small amount of data, ``gsl_sort`` is faster then
 ``qsort``, but for the large amount ``qsort`` is faster.
-
-.. _header-n65:
 
 Sort with Index
 ~~~~~~~~~~~~~~~
@@ -323,8 +348,8 @@ increases, the speed gap widens.
 
 .. _header-n72:
 
-Select Minimum/Maximum Subset
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Minimum/Maximum Subset
+~~~~~~~~~~~~~~~~~~~~~~
 
 Firstly, we compared ``mMinSubset`` in Morn and ``std::nth_element`` in
 C++ STL. Test code is:
@@ -371,7 +396,7 @@ roughly the same level**.
    ``mMinSubset`` and ``std::nth_element`` have some difference. For top-N
    program, these 2 functions all output unsorted subset, but
    ``std::nth_element`` outputs the threshold in array position n,
-   ``mMinSubset` outputs the threshold as return.
+   ``mMinSubset`` outputs the threshold as return.
 
 And then, we compared ``mMinSubset`` in Morn and ``gsl_sort_smallest``
 in `GSL <https://www.gnu.org/software/gsl/>`__. Testing code is:
@@ -411,8 +436,8 @@ It shows that: gap of time-consume between Morn and `GSL <https://www.gnu.org/so
 
 .. _header-n88:
 
-Select Minimum/Maximum Subset with Index
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Minimum/Maximum Subset with Index
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here we compared ``mMaxSubset`` in Morn and ``gsl_sort_largest_index``
 in `GSL <https://www.gnu.org/software/gsl/>`__. Testing code is:

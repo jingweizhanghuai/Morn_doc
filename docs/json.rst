@@ -622,7 +622,7 @@ Result is:
 
 |image3|
 
-It can be seen that: 1.`Morn <https://github.com/jingweizhanghuai/Morn>`__ and `yyjson <https://github.com/ibireme/yyjson>`__ are much faster then `rapidjson <https://github.com/Tencent/rapidjson>`__ with
+It can be seen that: 1. `Morn <https://github.com/jingweizhanghuai/Morn>`__ and `yyjson <https://github.com/ibireme/yyjson>`__ are much faster then `rapidjson <https://github.com/Tencent/rapidjson>`__ with
 2 to 5 times, 2.In most cases `Morn <https://github.com/jingweizhanghuai/Morn>`__ is faster then `yyjson <https://github.com/ibireme/yyjson>`__.
 
 .. |image1| image:: https://z3.ax1x.com/2021/10/13/5KQ2Is.png

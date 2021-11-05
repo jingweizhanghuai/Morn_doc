@@ -16,7 +16,7 @@ The source code of `Morn <https://github.com/jingweizhanghuai/Morn>`__ sort is
 
 .. tip:: 
 
-   "Generic" is supported，``Type`` can be ``int8_t``, ``uint8_t``,
+   "Generic" is supported，``Type`` in following APIs can be ``int8_t``, ``uint8_t``,
    ``int16_t``, ``uint16_t``, ``int32_t``, ``uint32_t``, ``int64_t``,
    ``uint64_t``, ``float`` or ``double``.
 
@@ -102,13 +102,13 @@ Sort List Element
 ~~~~~~~~~~~~~~~~~
 
 All above APIs is for types of number, and Morn provides ``mListSort``
-for ``MList``, which is a data containers for all types. See
+for ``MList``, which is a data container for all types. See
 `MList <Morn:MList2>`__ for details.
 
 Example
 -------
 
-Here is some simple example. The complete code is `test_sort.c <https://github.com/jingweizhanghuai/Morn/blob/master/test/test_sort.c>`__.
+Here is some simple examples. The complete code is `test_sort.c <https://github.com/jingweizhanghuai/Morn/blob/master/test/test_sort.c>`__.
 
 Data Sort
 ~~~~~~~~~
@@ -297,7 +297,7 @@ fastest**, 2.for small amount of data, ``gsl_sort`` is faster then
 Sort with Index
 ~~~~~~~~~~~~~~~
 
-Here we compared ``mAscSort`` in Morn and ``gsl_sort_index`` in `GSL <https://www.gnu.org/software/gsl/>`__.
+Sorting performance is always a concern, Here we compared ``mAscSort`` in Morn and ``gsl_sort_index`` in `GSL <https://www.gnu.org/software/gsl/>`__.
 Testing code is:
 
 .. code:: c

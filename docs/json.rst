@@ -1,4 +1,3 @@
-.. _header-n0:
 
 JSON
 ====
@@ -17,26 +16,32 @@ This is a typical JSON string, we will take it as an example:
        "f": false,
        "n": null,
        "i": 123,
-       "pi": 3.1415926,
+       "pi": 3.1415926535897932384626433832795,
+       
+       "minimum": -Inf,
+       "maximum": Infinity,
+       "not_a_number": NaN,
+       
+       "esc": "\n\"Morn\"\n\twelcome!",
+       "unicode": "my name is \"\u6cfe\u6e2d\u6f33\u6dee\". ",
+   
+       "comment1": "Simple Morn", // this is an annotation
+       "comment2":/* this is an annotation */ "Fast Morn",
+       
        "a1": [0,1,2,3],
-       "a2": [[00,01,02,03],[10,11,12,13],[20,21,22,23]],
-       "a3": [
-           [[000,001,002],[010,011,012]],
-           [[100,101,102],[110,111,112]],
-           [[200,201,202],[210,211,212]]
-       ],
+       "a2": [[0,1,2,3],[10,11,12,13],[20,21,22,23]],
+       "a3": [[[  0,  1,  2],[ 10, 11, 12]],[[100,101,102],[110,111,112]],[[200,201,202],[210,211,212]]],
+       
        "a4": [{"value":0},{"value":1}],
+       
        "date":
        {
            "year" :2021,
            "month":"June",
            "day":5
        },
-       "city":[
-           {"Beijing":["Dongcheng","Xicheng","Haidian","Chaoyang"]},
-           "Shanghai",
-           "Tianjin"
-       ],
+       
+       "city":[{"Beijing":["Dongcheng","Xicheng","Haidian","Chaoyang"]},"Shanghai","Tianjin"],
        "province":
        {
            "Hebei":["Shijiazhuang","Tangshan","Hengshui"],
@@ -45,16 +50,12 @@ This is a typical JSON string, we will take it as an example:
        }
    }
 
-.. _header-n5:
-
 API
 ---
 
 The source code of `Morn <https://github.com/jingweizhanghuai/Morn>`__ JSON is
 `morn_json.c <https://github.com/jingweizhanghuai/Morn/blob/master/src/util/morn_JSON.c>`__, and APIs are defined in
 `morn_util.h <https://github.com/jingweizhanghuai/Morn/blob/master/include/morn_util.h>`__.
-
-.. _header-n6:
 
 JSON Node
 ~~~~~~~~~
@@ -97,7 +98,6 @@ JSON Node is defined as:
        int8_t type;
    };
 
-.. _header-n11:
 
 Load and Parse JSON
 ~~~~~~~~~~~~~~~~~~~
@@ -193,7 +193,7 @@ Taking the beginning JSON file as an example, it can be read as:
 
        struct JSONNode *json=mJSONLoad(file);
        printf("json->type=%s\n",jsontype[json->type]);
-       printf("json->num=%d\n",json->num);
+       printf("json->num=%d\n\n",json->num);
 
        struct JSONNode *node;
        node=mJSONRead(json,"hello");
@@ -210,11 +210,24 @@ In this example, two nodes have been read: root-node and hello-node. Output is:
 
    json->type=LIST
    json->num=13
+   
    node->type=KEY_STRING
    node->key=hello
    node->string=world
 
-Code can also be written as following forms:
+Code can also be written as the following forms:
+
+For JSON string:
+
+.. code:: json
+
+   "t": true ,
+   "f": false,
+   "n": null,
+   "i": 123,
+   "pi": 3.1415926535897932384626433832795,
+
+Read as:
 
 .. code:: c
 
@@ -242,9 +255,46 @@ Output is:
    t=1
    f=0
    i=123
-   pi=3.141592
+   pi=3.141593
 
-Note here that: ``nul`` will be understood as a null string:
+When reading double values, `NaN`, `Inf`, `Infinity`, `-Inf` and `-Infinity` are supported.
+
+For JSON string:
+
+.. code:: json
+
+   "minimum": -Inf,
+   "maximum": Infinity,
+   "not_a_number": NaN,
+
+Read as:
+
+.. code:: c
+
+   node = mJSONRead(json,"minimum");
+   printf("maximum node_type=%s,value=%f\n",jsontype[node->type],node->dataD64);
+   node = mJSONRead(json,"maximum");
+   printf("maximum node_type=%s,value=%f\n",jsontype[node->type],node->dataD64);
+   node = mJSONRead(json,"not_a_number");
+   printf("not_a_number node_type=%s,value=%f\n",jsontype[node->type],node->dataD64);
+
+Output is:
+
+.. code:: 
+
+   maximum node_type=KEY_DOUBLE,value=-inf
+   maximum node_type=KEY_DOUBLE,value=inf
+   not_a_number node_type=KEY_DOUBLE,value=nan
+
+``null`` will be understood as a null string.
+
+For JSON string:
+
+.. code:: json
+
+   "n": null,
+
+Read as:
 
 .. code:: c
 
@@ -255,12 +305,95 @@ Output is:
 
 .. code:: 
 
-   type=KEY_STRING,nul=0000000000000000
+   type=KEY_STRING,nul=(nil)
+
+When reading string from JSON, the fillowing escape characters are supported: `\n`, `\r`, `\t`, `\v`, `\b`, `\f`. In JSON 
+string: `"` must be written as `\"`, `\` must be written as `\\`. for example:
+
+JSON string:
+
+.. code:: json
+
+   "esc": "\n\"Morn\"\n\twelcome!",
+
+Read as:
+
+.. code:: c
+
+   node = mJSONRead(json,"esc");
+   printf("esc=%s\n",node->string);
+
+Output is:
+
+.. code:: 
+
+   esc=
+   "Morn"
+           welcome!
+
+Unicode surrogate is supported.
+
+For JSON string:
+
+.. code:: json
+
+   "unicode": "my name is \"\u6cfe\u6e2d\u6f33\u6dee\". ",
+
+Read as:
+
+.. code:: c
+
+   node = mJSONRead(json,"unicode");
+   printf("unicode=%s\n",node->string);
+
+Output is:
+
+.. code:: 
+
+   unicode=my name is "泾渭漳淮".
+
+Comment code is supported. It can be line-comment(`//...`) or block-comments(`/*...*/`).
+
+For JSON string:
+
+.. code:: json
+
+   "comment1": "Simple Morn", // this is an annotation
+   "comment2":/* this is an annotation */ "Fast Morn",
+
+Read as:
+
+.. code:: c
+
+   node = mJSONRead(json,"comment1");
+   printf("comment1 = %s\n",node->string);
+   node = mJSONRead(json,"comment2");
+   printf("comment2 = %s\n",node->string);
+
+Output is:
+
+.. code:: 
+
+   comment1 = Simple Morn
+   comment2 = Fast Morn
 
 Read from List
 ~~~~~~~~~~~~~~
 
 For further child node, it can be read layer by layer, for example:
+
+JSON string:
+
+.. code:: json
+
+   "date":
+   {
+       "year" :2021,
+       "month":"June",
+       "day":5
+   },
+
+It can be read as:
 
 .. code:: c
 
@@ -299,6 +432,14 @@ Read from Array
 
 Several flexible forms for reading from arrays are provided as:
 
+For JSON string:
+
+.. code:: json
+
+   "a1": [0,1,2,3],
+
+Read as:
+
 .. code:: c
 
    struct JSONNode *p;
@@ -322,6 +463,14 @@ Output is:
    a1[3]=3
 
 Multidimensional Array can also be read as further child with cross layers read:
+
+For JSON string:
+
+.. code:: json
+
+   "a2": [[0,1,2,3],[10,11,12,13],[20,21,22,23]],
+
+It can be read as:
 
 .. code:: c
 
@@ -354,7 +503,20 @@ Output is:
 Mixed Read
 ~~~~~~~~~~
 
-Node can also be read from mixed list and array, as:
+Node can also be read from mixed list and array.
+
+For JSON string:
+
+.. code:: json
+
+   "province":
+   {
+       "Hebei":["Shijiazhuang","Tangshan","Hengshui"],
+       "Anhui":["Hefei","Huangshan"],
+       "Gansu":"Lanzhou"
+   }
+
+Read as:
 
 .. code:: c
 

@@ -309,9 +309,9 @@ Output is:
 
 .. note:: 
 
-   ``null``, ``true``, ``false``, ``NaN``, "Inf``, ``Infinity`` are case-sensitive.
+   ``null``, ``true``, ``false``, ``NaN``, ``Inf``, ``Infinity`` are case-sensitive.
 
-When reading string from JSON, the fillowing escape characters are supported: ``\n``, ``\r``, ``\t``, ``\v``, ``\b``, ``\f``. In JSON 
+When reading string from JSON, the fillowing **escape characters are supported**: ``\n``, ``\r``, ``\t``, ``\v``, ``\b``, ``\f``. In JSON 
 string: ``"`` must be written as ``\"``, ``\`` must be written as ``\\``. for example:
 
 JSON string:
@@ -335,7 +335,7 @@ Output is:
    "Morn"
            welcome!
 
-Unicode surrogate is supported.
+**Unicode surrogate is supported.**
 
 For JSON string:
 
@@ -356,7 +356,7 @@ Output is:
 
    unicode=my name is "泾渭漳淮".
 
-Comment code is supported. It can be line-comment(``//...``) or block-comments(``/*...*/``).
+**Comment code is supported.** It can be line-comment(``//...``) or block-comments(``/*...*/``).
 
 For JSON string:
 

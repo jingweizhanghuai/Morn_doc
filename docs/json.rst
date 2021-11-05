@@ -257,7 +257,7 @@ Output is:
    i=123
    pi=3.141593
 
-When reading double values, `NaN`, `Inf`, `Infinity`, `-Inf` and `-Infinity` are supported.
+When reading double values, ``NaN``, ``Inf``, ``Infinity``, ``-Inf`` and ``-Infinity`` are supported.
 
 For JSON string:
 
@@ -307,8 +307,8 @@ Output is:
 
    type=KEY_STRING,nul=(nil)
 
-When reading string from JSON, the fillowing escape characters are supported: `\n`, `\r`, `\t`, `\v`, `\b`, `\f`. In JSON 
-string: `"` must be written as `\"`, `\` must be written as `\\`. for example:
+When reading string from JSON, the fillowing escape characters are supported: ``\n``, ``\r``, ``\t``, ``\v``, ``\b``, ``\f``. In JSON 
+string: ``"`` must be written as ``\"``, ``\`` must be written as ``\\``. for example:
 
 JSON string:
 
@@ -352,7 +352,7 @@ Output is:
 
    unicode=my name is "泾渭漳淮".
 
-Comment code is supported. It can be line-comment(`//...`) or block-comments(`/*...*/`).
+Comment code is supported. It can be line-comment(``//...``) or block-comments(``/*...*/``).
 
 For JSON string:
 

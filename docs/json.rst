@@ -307,6 +307,10 @@ Output is:
 
    type=KEY_STRING,nul=(nil)
 
+.. note:: 
+
+   ``null``, ``true``, ``false``, ``NaN``, "Inf``, ``Infinity`` are case-sensitive.
+
 When reading string from JSON, the fillowing escape characters are supported: ``\n``, ``\r``, ``\t``, ``\v``, ``\b``, ``\f``. In JSON 
 string: ``"`` must be written as ``\"``, ``\`` must be written as ``\\``. for example:
 

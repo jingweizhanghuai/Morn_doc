@@ -795,5 +795,5 @@ It can be seen that: 1. `Morn <https://github.com/jingweizhanghuai/Morn>`__ and 
    :target: https://imgtu.com/i/5KQ2Is
 .. |image2| image:: https://z3.ax1x.com/2021/10/13/5KQWin.png
    :target: https://imgtu.com/i/5KQWin
-.. |image3| image:: https://z3.ax1x.com/2021/10/13/5KK5Yq.png
-   :target: https://imgtu.com/i/5KK5Yq
+.. |image3| image:: https://z3.ax1x.com/2021/11/07/I1oY7V.png
+   :target: https://imgtu.com/i/I1oY7V

@@ -37,7 +37,7 @@ Chrono
 
    int mChrono();
 
-This function will blocks until reaching the time set by function
+This function will block until reaching the time set by function
 ``mChronoTask``.
 
 It returns the task ID, tells which task-time reached.

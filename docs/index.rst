@@ -10,7 +10,10 @@ Contents:
    sort
    Map
    json
+   Chrono
+   ThreadPool
    MathParser
+   
 
 
 

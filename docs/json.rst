@@ -746,7 +746,6 @@ Testing program is:
        yyjson_test3(filename);
        Morn_test3(filename);
        
-   
        filename = "./testdata/twitter.json";
        printf("\nfor %s:\n",filename);
        rapidjson_test3(filename);

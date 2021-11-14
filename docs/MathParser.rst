@@ -13,8 +13,6 @@ The source code of `Morn <https://github.com/jingweizhanghuai/Morn>`__ math pars
 `morn_calculate.c <https://github.com/jingweizhanghuai/Morn/blob/master/src/math/morn_calculate.c>`__, and APIs are defined in
 `morn_math.h <https://github.com/jingweizhanghuai/Morn/blob/master/include/morn_math.h>`__.
 
-.. _header-n6:
-
 Calculate from Expression
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -24,10 +22,7 @@ Calculate from Expression
 
 The ``str`` is string of math expression. It returns the calculate result.
 
-Math expression here can be arithmetic operation whit ``+``, ``-``,
-``*`` ,\ ``/`` and other functions(predefined or custom).
-
-.. _header-n80:
+Math expression here can be arithmetic operation whit ``+``, ``-``, ``*`` ,\ ``/`` and other functions (predefined or custom).
 
 Register for Custom Functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,15 +47,11 @@ The new custom function for register must like this:
 Thus, 1.Type of the function parameter must be ``double``, 2.The function must has at
 least 1 parameter, and at most 8. 3.Return value is a must, and must be ``double``.
 
-.. _header-n108:
-
 Example
 -------
 
 Complete example file is
 `test_calculate.c <https://github.com/jingweizhanghuai/Morn/blob/master/test/test_calculate.c>`__
-
-.. _header-n110:
 
 Getting Start
 ~~~~~~~~~~~~~
@@ -86,8 +77,6 @@ Output is:
    sin(pi/2)          = 1.000000
    ln(e)              = 1.000000
    sqrt(3^2+pow(4,2)) = 5.000000
-
-.. _header-n158:
 
 Binding with Custom Functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -159,8 +148,6 @@ Output is:
 Regulation
 ----------
 
-.. _header-n171:
-
 predefined functions
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -191,15 +178,12 @@ In API ``mCalculate``, the below functions are supported:
 .. note:: 
 
    The input of sin(x), cos(x), tan(x) and cos(x) is radian (not angle).
-
    The return of asin(x), acos(x), atan(x), acot(x) is radian (not angle).
 
 All these above function names are case-insensitive.
 
 For These above functions, parentheses is a must. So ``ln5`` is invalid,
 and ``ln(5)`` is OK.
-
-.. _header-n245:
 
 precedence
 ~~~~~~~~~~
@@ -220,7 +204,6 @@ calculate from left to right.
 
    precedence is complex, parentheses is simple.
 
-.. _header-n266:
 
 Others
 ~~~~~~
@@ -229,16 +212,11 @@ Others
    percent-sign). So ``5%+2`` means 5 mod +2, the result is 1(instead of
    2.05).
 
--   Spaces key play no role in expression, so you can write '10000' or
-   '10 000', but not '10,000'.
+-   Spaces key play no role in expression, so you can write '10000' or '10 000', but not '10,000'.
 
--  ``pi`` (3.1415926) and ``e`` (2.718281828) are 2 constants, and they are
-   case-insensitive.
+-  ``pi`` (3.1415926) and ``e`` (2.718281828) are 2 constants, and they are case-insensitive.
 
--  The multiplication sign ``*`` cannot be omitted, ``2pi`` is invalid,
-   and ``2*pi`` is OK.
-
-.. _header-n60:
+-  The multiplication sign ``*`` cannot be omitted, ``2pi`` is invalid, and ``2*pi`` is OK.
 
 Tool
 ----

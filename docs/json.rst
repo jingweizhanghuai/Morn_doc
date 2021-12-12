@@ -170,7 +170,17 @@ Or it can be writen as:
    mJSONRead(mother,"child5",&child);  //mother is list, read the node with key is "child5"
    mJSONRead(mother,"a.b[3].c.d[6]",&child);    //read further child node
 
-.. _header-n28:
+Read JSON Node
+~~~~~~~~~~~~~~
+
+.. code:: c
+
+   struct JSONNode *mJSONWrite(struct JSONNode *node,struct JSONNode *dst);
+   struct JSONNode *mJSONWrite(struct JSONNode *node,int n,struct JSONNode *dst);
+   struct JSONNode *mJSONWrite(struct JSONNode *node,const char *key,struct JSONNode *dst);
+   struct JSONNode *mJSONWrite(struct JSONNode *node,int n,int type,...);
+   struct JSONNode *mJSONWrite(struct JSONNode *node,const char *key,int type,...);
+
 
 Example
 -------

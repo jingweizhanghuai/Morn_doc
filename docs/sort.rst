@@ -294,6 +294,13 @@ It can be seen that: 1. ``std::sort`` **and** ``mAscSort`` **is the
 fastest**, 2.for small amount of data, ``gsl_sort`` is faster then
 ``qsort``, but for the large amount ``qsort`` is faster.
 
+Here is a performance compare between ``Morn`` and ``std::sort``:
+
+|image1_1|
+
+It can be seen that Morn and stl::sort performance at nearly same level.
+
+
 Sort with Index
 ~~~~~~~~~~~~~~~
 
@@ -475,8 +482,10 @@ Obviously: Morn is much faster then `GSL <https://www.gnu.org/software/gsl/>`__.
    ``gsl_sort_largest_index`` output only index, and it is sorted,
    ``mMaxSubset`` outputs the index and data, but it is unsorted.
 
-.. |image1| image:: https://z3.ax1x.com/2021/04/11/c0WVPA.png
-   :target: https://imgtu.com/i/c0WVPA
+.. |image1| image:: https://s4.ax1x.com/2021/12/12/oqiyCD.png
+   :target: https://imgtu.com/i/oqiyCD
+.. |image1_1| image:: https://s4.ax1x.com/2021/12/12/oq9ANF.png
+   :target: https://imgtu.com/i/oq9ANF
 .. |image2| image:: https://z3.ax1x.com/2021/04/11/c0fVwF.png
    :target: https://imgtu.com/i/c0fVwF
 .. |image3| image:: https://z3.ax1x.com/2021/04/11/c0htBT.png

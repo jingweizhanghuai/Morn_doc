@@ -227,34 +227,30 @@ In this example, two nodes have been read: root-node and hello-node. Output is:
 
 Code can also be written as the following forms:
 
-For JSON string:
-
-.. code:: json
-
-   "t": true ,
-   "f": false,
-   "n": null,
-   "i": 123,
-   "pi": 3.1415926535897932384626433832795,
-
-Read as:
-
 .. code:: c
 
+   //for JSON string:
+   //   "t": true ,
    node=mJSONRead(json,"t");
    if(node!=NULL)
    {
        if(node->type==JSON_KEY_BOOL)
            printf("t=%d\n",node->dataBool);
    }
-
+   
+   //for JSON string:
+   //   "f": false,
    struct JSONNode f_node;
    node=mJSONRead(json,"f",&f_node);
    printf("f=%d\n",f_node.dataBool);
-
+   
+   //for JSON string:
+   //   "i": 123,
    int i=*(int *)mJSONRead(json,"i");
    printf("i=%d\n",i);
-
+   
+   //for JSON string:
+   //   "pi": 3.1415926535897932384626433832795,
    double *pi=(double *)mJSONRead(json,"pi");
    printf("pi=%lf\n",*pi);
 
@@ -267,24 +263,22 @@ Output is:
    i=123
    pi=3.141593
 
-When reading double values, ``NaN``, ``Inf``, ``Infinity``, ``-Inf`` and ``-Infinity`` are supported.
-
-For JSON string:
-
-.. code:: json
-
-   "minimum": -Inf,
-   "maximum": Infinity,
-   "not_a_number": NaN,
-
-Read as:
+When reading double values, ``NaN``, ``Inf``, ``Infinity``, ``-Inf`` and ``-Infinity`` are supported. Read as:
 
 .. code:: c
 
+   //For JSON string:
+   //   "minimum": -Inf,
    node = mJSONRead(json,"minimum");
    printf("maximum node_type=%s,value=%f\n",jsontype[node->type],node->dataD64);
+
+   //for JSON string:
+   //   "maximum": Infinity,
    node = mJSONRead(json,"maximum");
    printf("maximum node_type=%s,value=%f\n",jsontype[node->type],node->dataD64);
+
+   //for JSON string:
+   //   "not_a_number": NaN,
    node = mJSONRead(json,"not_a_number");
    printf("not_a_number node_type=%s,value=%f\n",jsontype[node->type],node->dataD64);
 
@@ -296,18 +290,12 @@ Output is:
    maximum node_type=KEY_DOUBLE,value=inf
    not_a_number node_type=KEY_DOUBLE,value=nan
 
-``null`` will be understood as a null string.
-
-For JSON string:
-
-.. code:: json
-
-   "n": null,
-
-Read as:
+``null`` will be understood as a null string. Read as:
 
 .. code:: c
 
+   //for JSON string:
+   //   "n": null,
    node = mJSONRead(json,"n");
    printf("type=%s,nul=%p\n",jsontype[node->type],node->string);
 
@@ -324,16 +312,10 @@ Output is:
 When reading string from JSON, the fillowing **escape characters are supported**: ``\n``, ``\r``, ``\t``, ``\v``, ``\b``, ``\f``. In JSON 
 string: ``"`` must be written as ``\"``, ``\`` must be written as ``\\``. for example:
 
-JSON string:
-
-.. code:: json
-
-   "esc": "\n\"Morn\"\n\twelcome!",
-
-Read as:
-
 .. code:: c
 
+   //for JSON string:
+   //   "esc": "\n\"Morn\"\n\twelcome!",
    node = mJSONRead(json,"esc");
    printf("esc=%s\n",node->string);
 
@@ -347,16 +329,10 @@ Output is:
 
 **Unicode surrogate is supported.**
 
-For JSON string:
-
-.. code:: json
-
-   "unicode": "my name is \"\u6cfe\u6e2d\u6f33\u6dee\". ",
-
-Read as:
-
 .. code:: c
 
+   //for JSON string:
+   //   "unicode": "my name is \"\u6cfe\u6e2d\u6f33\u6dee\". ",
    node = mJSONRead(json,"unicode");
    printf("unicode=%s\n",node->string);
 
@@ -368,17 +344,11 @@ Output is:
 
 **Comment code is supported.** It can be line-comment(``//...``) or block-comments(``/*...*/``).
 
-For JSON string:
-
-.. code:: json
-
-   "comment1": "Simple Morn", // this is an annotation
-   "comment2":/* this is an annotation */ "Fast Morn",
-
-Read as:
-
 .. code:: c
 
+   //for JSON string:
+   //   "comment1": "Simple Morn", // this is an annotation
+   //   "comment2":/* this is an annotation */ "Fast Morn",
    node = mJSONRead(json,"comment1");
    printf("comment1 = %s\n",node->string);
    node = mJSONRead(json,"comment2");
@@ -396,21 +366,15 @@ Read from List
 
 For further child node, it can be read layer by layer, for example:
 
-JSON string:
-
-.. code:: json
-
-   "date":
-   {
-       "year" :2021,
-       "month":"June",
-       "day":5
-   },
-
-It can be read as:
-
 .. code:: c
 
+   //for JSON string:
+   //   "date":
+   //   {
+   //       "year" :2021,
+   //       "month":"June",
+   //       "day":5
+   //   },
    node=mJSONRead(json,"date");
    struct JSONNode *year=mJSONRead(node,"year");
    printf("date.year=%d,type=%s\n",year->dataS32,mJSONNodeType(year));
@@ -423,6 +387,13 @@ Or it can be read cross layers:
 
 .. code:: c
 
+   //for JSON string:
+   //   "date":
+   //   {
+   //       "year" :2021,
+   //       "month":"June",
+   //       "day":5
+   //   },
    struct JSONNode *year=mJSONRead(json,"date.year");
    printf("date.year=%d,type=%s\n",year->dataS32,mJSONNodeType(year));
    struct JSONNode *month=mJSONRead(json,"date.month");
@@ -446,16 +417,10 @@ Read from Array
 
 Several flexible forms for reading from arrays are provided as:
 
-For JSON string:
-
-.. code:: json
-
-   "a1": [0,1,2,3],
-
-Read as:
-
 .. code:: c
 
+   //for JSON string:
+   //   "a1": [0,1,2,3],
    struct JSONNode *p;
    node=mJSONRead(json,"a1");
    p = mJSONRead(node);
@@ -477,23 +442,18 @@ Output is:
    a1[3]=3
 
 Multidimensional Array can also be read as further child with cross layers read:
-
-For JSON string:
-
-.. code:: json
-
-   "a2": [[0,1,2,3],[10,11,12,13],[20,21,22,23]],
-
-It can be read as:
-
 .. code:: c
 
+   //for JSON string:
+   //   "a2": [[0,1,2,3],[10,11,12,13],[20,21,22,23]],
    node = mJSONRead(json,"a2[1][2]");
 
 And also can be read layer by layer:
 
 .. code:: c
 
+   //for JSON string:
+   //   "a2": [[0,1,2,3],[10,11,12,13],[20,21,22,23]],
    struct JSONNode *a2=mJSONRead(json,"a2");
    for(int j=0;j<a2->num;j++)
    {
@@ -517,23 +477,17 @@ Output is:
 Mixed Read
 ~~~~~~~~~~
 
-Node can also be read from mixed list and array.
-
-For JSON string:
-
-.. code:: json
-
-   "province":
-   {
-       "Hebei":["Shijiazhuang","Tangshan","Hengshui"],
-       "Anhui":["Hefei","Huangshan"],
-       "Gansu":"Lanzhou"
-   }
-
-Read as:
+Node can also be read from mixed list and array. Just as:
 
 .. code:: c
 
+   //for JSON string:
+   //   "province":
+   //   {
+   //       "Hebei":["Shijiazhuang","Tangshan","Hengshui"],
+   //       "Anhui":["Hefei","Huangshan"],
+   //       "Gansu":"Lanzhou"
+   //   }
    node = mJSONRead(json,"province.Hebei[0]");
    printf("%s\n",node->string);
    node = mJSONRead(json,"province.Anhui[0]");

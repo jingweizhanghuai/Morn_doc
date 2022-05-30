@@ -1,5 +1,3 @@
-.. _header-n2:
-
 Permutation & Combination 
 =========================
 
@@ -13,12 +11,10 @@ without order. ``m≥n`` of course.
 
 In Morn, permutation and combination use structural ``MList`` .
 
-.. _header-n6:
 
 API
 ---
 
-.. _header-n7:
 
 Combination
 ~~~~~~~~~~~
@@ -33,7 +29,6 @@ This function is used to select ``m`` from all the list elements
 Looping execute of this function will obtain all possible combinations,
 and if all combinations have already been listed, it returns ``NULL``.
 
-.. _header-n57:
 
 Permutation
 ~~~~~~~~~~~
@@ -51,12 +46,10 @@ If ``m`` is not given, it is all permutations for all list elements.
 Looping execute of this function will obtain all possible permutations,
 and if all permutations have already been listed, it returns ``NULL``.
 
-.. _header-n71:
 
 Example
 -------
 
-.. _header-n62:
 
 Combination
 ~~~~~~~~~~~
@@ -88,27 +81,26 @@ The execution results:
 
 .. code:: 
 
-    1+ 2+ 7+10==20
-    1+ 2+ 8+ 9==20
-    1+ 3+ 6+10==20
-    1+ 3+ 7+ 9==20
-    1+ 4+ 5+10==20
-    1+ 4+ 6+ 9==20
-    1+ 4+ 7+ 8==20
-    1+ 5+ 6+ 8==20
-    2+ 3+ 5+10==20
-    2+ 3+ 6+ 9==20
-    2+ 3+ 7+ 8==20
-    2+ 4+ 5+ 9==20
-    2+ 4+ 6+ 8==20
-    2+ 5+ 6+ 7==20
-    3+ 4+ 5+ 8==20
+    1+ 2+ 7+10==20
+    1+ 2+ 8+ 9==20
+    1+ 3+ 6+10==20
+    1+ 3+ 7+ 9==20
+    1+ 4+ 5+10==20
+    1+ 4+ 6+ 9==20
+    1+ 4+ 7+ 8==20
+    1+ 5+ 6+ 8==20
+    2+ 3+ 5+10==20
+    2+ 3+ 6+ 9==20
+    2+ 3+ 7+ 8==20
+    2+ 4+ 5+ 9==20
+    2+ 4+ 6+ 8==20
+    2+ 5+ 6+ 7==20
+    3+ 4+ 5+ 8==20
     3+ 4+ 6+ 7==20
 
 Of course, it is not the easiest algorithm, It is just
 a\ ``mCombination`` demo.
 
-.. _header-n17:
 
 Permutation
 ~~~~~~~~~~~

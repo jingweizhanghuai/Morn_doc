@@ -13,7 +13,7 @@ Contents:
    Chrono
    ThreadPool
    MathParser
-   
+   Permutation & Combination
 
 
 

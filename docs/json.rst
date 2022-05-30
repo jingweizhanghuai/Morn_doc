@@ -410,7 +410,7 @@ Outputs of these above two programs are the same:
    date.day=5,type=KEY_INT
 
 .. tip:: 
-   If you want to traverse all the child nodes, Read layer-by-layer is faster than reading cross layers.
+   When traversing all the child-nodes, Reading layer-by-layer is faster than reading cross layers.
 
 Read from Array
 ~~~~~~~~~~~~~~~

@@ -8,9 +8,10 @@ Contents:
    :glob:
 
    Math
-   sort
+   Sort
+   Log
    Map
-   json
+   Json
    Chrono
    ThreadPool
    MathParser

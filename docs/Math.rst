@@ -33,10 +33,10 @@ Logarithm
    double mLogX(double x,double v);
 
 ``mLn`` is similar with ``log`` in C standard library, and ``mLg`` is
-similar with ``log10``, ``mLog2`` is similar with ``mLog2``.
+similar with ``log10``, ``mLog2`` is similar with ``log2``.
 
 ``mLogX`` is a general function, which the base of logarithm ``x`` must
-be given by users.
+be set.
 
 
 Root-Extraction
@@ -63,13 +63,9 @@ Trigonometric
 
 These 4 functions indicate sine cosine tangent and cotangent.
 
-node:
+.. note:: 
 
-Here the angle input must be degree, with 360 degrees for a cicle, and
-not radians. this is different with C
-
-standard library.
-
+   Here the angle input must be degree, with 360 degrees for a cicle, and not radians. this is different with C standard library.
 
 Binary Round
 ~~~~~~~~~~~~

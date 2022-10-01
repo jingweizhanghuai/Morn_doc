@@ -1,4 +1,3 @@
-.. _header-n0:
 
 Log
 ===
@@ -21,15 +20,13 @@ library. It is **simple** (with only one interface) and
 
 -  Synchronous logging mode.
 
-.. _header-n17:
 
 API
 ---
 
 ``mLog`` is the only logging API, witch is used to generate and output
-the logging information。
+the logging information.
 
-.. _header-n19:
 
 Logging
 ~~~~~~~
@@ -54,14 +51,13 @@ the result is print the information below on console.
 
    this is a Morn log, num=1
 
-.. _header-n26:
 
 Logging Format
 ~~~~~~~~~~~~~~
 
 **Preset Logging Format**
 
-Morn use ``mLogFormat``\ (which is syntactic sugar) to use preset
+Morn use ``mLogFormat`` (which is syntactic sugar) to use preset
 format.
 
 .. code:: c
@@ -123,7 +119,7 @@ The following APIs may be used to define new logging format.
 
 .. code:: c
 
-   const char *mLogLevel();  		
+   const char *mLogLevel();
 
 It will return the logging level string which is input with ``mLog``. it
 may be: "Debug", “Info", "Warning" or "Error".
@@ -135,7 +131,7 @@ may be: "Debug", “Info", "Warning" or "Error".
    const char *mTimeString(int64_t time_value,const char *format);
 
 See `Morn Data and Time <./Morn：时间和日期>`__ for
-details.\ ``mTimeString(DFLT,NULL)`` may useful。
+details. ``mTimeString(DFLT,NULL)`` may useful.
 
 -  Thread ID
 
@@ -161,13 +157,13 @@ logging module is "Log".
 
    mPropertyWrite("Log","log_level",(int *)p_log_level,sizeof(int));
 
-The property name is\ ``"log_level"``, and it is an ``int``.
+The property name is "log_level", and it is an ``int``.
 
 Logs are output only when the level input by ``mLog`` is greater than or
 equal to this level_level. Otherwise, logs are ignored.
 
 The preset level by Morn is
-``MORN_DEBUG``\ ，\ ``MORN_INFO``\ ，\ ``MORN_WARNING`` and
+``MORN_DEBUG`` , ``MORN_INFO`` , ``MORN_WARNING`` and
 ``MORN_ERROR``, they are defined as:
 
 .. code:: c
@@ -177,7 +173,7 @@ The preset level by Morn is
    #define MORN_WARNING 32
    #define MORN_ERROR   48
 
-For example, To set the property "log\ *level" with \`MORN*\ WARNING\` ,
+For example, To set the property "log_level" with ``MORN_WARNING``, 
 the code can be:
 
 .. code:: c
@@ -185,8 +181,8 @@ the code can be:
    int log_level = MORN_WARNING;
    mPropertyWrite("Log","log_level",&log_level,sizeof(int));
 
-And if no property "log\ *level" is set, the default level is
-\`MORN*\ INFO\ ``(for release version) or``\ MORN_DEBUG\` (for debug
+And if no property "log_level" is set, the default level is
+``MORN_INFO`` (for release version) or ``MORN_DEBUG`` (for debug
 version).
 
 User-defined logging level is also support. For example you would define
@@ -244,7 +240,7 @@ The output will be:
    mPropertyWrite("Log","log_file",(const char *)filename); //output log to file
    mPropertyWrite("Log","log_file","exit"); 				 //ending output to file
 
-The property name is\ ``"log_file"``, and it is a string.
+The property name is ``"log_file"``, and it is a string.
 
 Only when property "log_file" is write,it will output the log
 information to the file.
@@ -272,7 +268,7 @@ file will be create, and the older one will be saved.
 
    mPropertyWrite("Log","log_console",&p_log_console,sizeof(int));
 
-The property name is\ ``"log_filesize"``, and it is a ``int``, Non-0
+The property name is ``"log_filesize"``, and it is a ``int``, Non-0
 means enable console printing, and 0 means disable.
 
 Console print is the default way of logging output.
@@ -313,14 +309,14 @@ In this program:
 
 The 1st log, no property was write, it will print on console.
 
-The 2nd log, property "log\ *file" is write, it will output to file
-"./test*\ log.log", and console disabled.
+The 2nd log, property "log_file" is write, it will output to file
+"./test_log.log", and console disabled.
 
 The 3rd log, "exit" is write to property "log_file", the file output is
 terminate, and it will print on console.
 
-the 4th log, a new file name is write to property "log\ *file", it will
-output to file "./test*\ log2.log", and console disabled.
+the 4th log, a new file name is write to property "log_file", it will
+output to file "./test_log2.log", and console disabled.
 
 the 5th log, property "log_console" is enabled, it will output both to
 file and to console.
@@ -328,8 +324,8 @@ file and to console.
 the 6th log, since "log_console" is disabled, it will only output to
 file.
 
-the 7th log, "exit" is write to property "log\ *file", console output
-will be the only way, whether "log*\ console" is enabled or not .
+the 7th log, "exit" is write to property "log_file", console output
+will be the only way, whether "log_console" is enabled or not .
 
 So on console:
 
@@ -364,7 +360,7 @@ logging output is support. a user function can be write to property
 
    mPropertyWrite("Log","log_function",&func,sizeof(void *));  //设置日志输出函数
 
-and if function parameter is necessary, property "log\ *func*\ para"
+and if function parameter is necessary, property "log_func_para"
 would also be write.
 
 .. code:: c

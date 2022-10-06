@@ -149,7 +149,7 @@ Logging Property
 ~~~~~~~~~~~~~~~~
 
 ``mPropertyWrite`` can be used to set logging property. The name of
-logging module is "Log".
+logging module is ``Log``.
 
 **Logging level**
 
@@ -157,7 +157,7 @@ logging module is "Log".
 
    mPropertyWrite("Log","log_level",(int *)p_log_level,sizeof(int));
 
-The property name is "log_level", and it is an ``int``.
+The property name is ``log_level``, and it is an ``int``.
 
 Logs are output only when the level input by ``mLog`` is greater than or
 equal to this level_level. Otherwise, logs are ignored.
@@ -173,7 +173,7 @@ The preset level by Morn is
    #define MORN_WARNING 32
    #define MORN_ERROR   48
 
-For example, To set the property "log_level" with ``MORN_WARNING``, 
+For example, To set the property ``log_level`` with ``MORN_WARNING``, 
 the code can be:
 
 .. code:: c
@@ -181,7 +181,7 @@ the code can be:
    int log_level = MORN_WARNING;
    mPropertyWrite("Log","log_level",&log_level,sizeof(int));
 
-And if no property "log_level" is set, the default level is
+And if no property ``log_level`` is set, the default level is
 ``MORN_INFO`` (for release version) or ``MORN_DEBUG`` (for debug
 version).
 
@@ -240,12 +240,12 @@ The output will be:
    mPropertyWrite("Log","log_file",(const char *)filename); //output log to file
    mPropertyWrite("Log","log_file","exit"); 				 //ending output to file
 
-The property name is ``"log_file"``, and it is a string.
+The property name is ``log_file``, and it is a string.
 
-Only when property "log_file" is write,it will output the log
+Only when property ``log_file`` is write,it will output the log
 information to the file.
 
-And if you want ending log file output, write "exit" to this property.
+And if you want ending log file output, write ``exit`` to this property.
 
 **Logging File Size**
 
@@ -253,13 +253,13 @@ And if you want ending log file output, write "exit" to this property.
 
    mPropertyWrite("Log","log_filesize",(int *)p_filesize,sizeof(int));
 
-The property name is "log_filesize", and it is a ``int``, means the
+The property name is ``log_filesize``, and it is a ``int``, means the
 bytes of output file.
 
-this property works only when property "log_file" is write.
+this property works only when property ``log_file`` is write.
 
 Only when this property be write, the log file will split into multiple
-files. That is when file size greater than "log_filesize", a new log
+files. That is when file size greater than ``log_filesize``, a new log
 file will be create, and the older one will be saved.
 
 **Logging Console**
@@ -268,7 +268,7 @@ file will be create, and the older one will be saved.
 
    mPropertyWrite("Log","log_console",&p_log_console,sizeof(int));
 
-The property name is ``"log_filesize"``, and it is a ``int``, Non-0
+The property name is ``log_filesize``, and it is a ``int``, Non-0
 means enable console printing, and 0 means disable.
 
 Console print is the default way of logging output.
@@ -309,23 +309,23 @@ In this program:
 
 The 1st log, no property was write, it will print on console.
 
-The 2nd log, property "log_file" is write, it will output to file
-"./test_log.log", and console disabled.
+The 2nd log, property ``log_file`` is write, it will output to file
+``./test_log.log``, and console disabled.
 
-The 3rd log, "exit" is write to property "log_file", the file output is
+The 3rd log, ``exit`` is write to property ``log_file``, the file output is
 terminate, and it will print on console.
 
-the 4th log, a new file name is write to property "log_file", it will
-output to file "./test_log2.log", and console disabled.
+the 4th log, a new file name is write to property ``log_file``, it will
+output to file ``./test_log2.log``, and console disabled.
 
-the 5th log, property "log_console" is enabled, it will output both to
+the 5th log, property ``log_console`` is enabled, it will output both to
 file and to console.
 
-the 6th log, since "log_console" is disabled, it will only output to
+the 6th log, since ``log_console`` is disabled, it will only output to
 file.
 
-the 7th log, "exit" is write to property "log_file", console output
-will be the only way, whether "log_console" is enabled or not .
+the 7th log, ``exit`` is write to property ``log_file``, console output
+will be the only way, whether ``log_console`` is enabled or not .
 
 So on console:
 
@@ -336,13 +336,13 @@ So on console:
    this is log No.5
    this is log No.7
 
-in file "./test_log.log":
+in file ``./test_log.log``:
 
 .. code:: 
 
    this is log No.2
 
-in file "./test_log2.log":
+in file ``./test_log2.log``:
 
 .. code:: c
 
@@ -354,13 +354,13 @@ in file "./test_log2.log":
 
 In addition to output log to console or file, user-defined way of
 logging output is support. a user function can be write to property
-"log_function"
+``log_function``
 
 .. code:: c
 
    mPropertyWrite("Log","log_function",&func,sizeof(void *));  //设置日志输出函数
 
-and if function parameter is necessary, property "log_func_para"
+and if function parameter is necessary, property ``log_func_para``
 would also be write.
 
 .. code:: c

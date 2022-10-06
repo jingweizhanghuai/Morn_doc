@@ -12,6 +12,7 @@ Contents:
    Log
    Map
    Json
+   Inter-Process Communication
    Chrono
    ThreadPool
    MathParser
